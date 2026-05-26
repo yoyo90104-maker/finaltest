@@ -19,6 +19,7 @@
 .life-card{height:74px;border:2px solid #dbeafe;background:#fff;border-radius:15px;padding:8px;cursor:grab;transition:.18s;box-shadow:0 4px 10px rgba(15,23,42,.04);display:flex;flex-direction:column;justify-content:space-between}
 .life-card:hover{transform:translateY(-2px);border-color:#60a5fa;background:#eff6ff;box-shadow:0 10px 20px rgba(37,99,235,.12)}
 .life-card.dragging{opacity:.55;transform:scale(.96)}
+.life-card.picked{border-color:#2563eb;background:#eff6ff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
 .life-card-title{font-size:13px;font-weight:900;line-height:1.15;display:flex;justify-content:space-between;gap:4px}
 .life-effect{font-size:10.5px;line-height:1.2;color:#64748b}.life-effect .pos{color:#16a34a;font-weight:900}.life-effect .neg{color:#ef4444;font-weight:900}.drag-icon{color:#94a3b8;font-size:13px}
 .life-timeline{flex:1;min-height:0;overflow:auto;padding-right:4px;display:grid;grid-template-columns:1fr;grid-auto-rows:minmax(76px,auto);gap:8px}
@@ -1173,191 +1174,145 @@
     grid-template-columns:1fr;
   }
 }
-</style>
 
-
-<style id="q9-enter-top-fix-v26">
-/* 第9題進入時不要跳到底部 */
-.screen.life-screen{
-  scroll-behavior:auto !important;
-}
-
-.main.single-mode .question-panel{
-  scroll-behavior:auto !important;
-}
-</style>
-
-
-<style id="instant-feedback-toast-v27">
-.instant-feedback-toast{
-  position:fixed;
-  left:50%;
-  bottom:28px;
-  transform:translateX(-50%);
-  z-index:12000;
-  width:min(720px,calc(100% - 32px));
-  padding:16px 20px;
-  border-radius:20px;
-  box-shadow:0 18px 48px rgba(15,23,42,.25);
-  font-weight:900;
-  line-height:1.7;
-  display:none;
-  border:2px solid transparent;
-}
-.instant-feedback-toast.show{display:block;animation:toastPop .18s ease;}
-.instant-feedback-toast.good{background:#dcfce7;color:#166534;border-color:#86efac;}
-.instant-feedback-toast.bad{background:#fee2e2;color:#991b1b;border-color:#fca5a5;}
-@keyframes toastPop{from{opacity:0;transform:translateX(-50%) translateY(18px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
-</style>
-
-
-
-
-
-<style id="toast-feedback-final-v30">
-.instant-feedback-toast{
-  position:fixed;
-  left:50%;
-  bottom:26px;
-  transform:translateX(-50%);
-  z-index:12000;
-
-  width:min(820px,calc(100% - 28px));
-
-  padding:18px 24px;
-
-  border-radius:24px;
-
-  box-shadow:0 20px 60px rgba(15,23,42,.30);
-
-  font-size:22px;
-  line-height:1.8;
-  font-weight:900;
-
-  display:none;
-
-  border:2px solid transparent;
-
-  backdrop-filter:blur(8px);
-}
-
-.instant-feedback-toast.show{
-  display:block;
-  animation:toastRise .22s ease;
-}
-
-.instant-feedback-toast.good{
-  background:#dcfce7;
-  color:#166534;
-  border-color:#86efac;
-}
-
-.instant-feedback-toast.bad{
-  background:#fee2e2;
-  color:#991b1b;
-  border-color:#fca5a5;
-}
-
-@keyframes toastRise{
-  from{
-    opacity:0;
-    transform:translateX(-50%) translateY(24px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-  }
+/* Compact presentation for browser zoom at 100%. */
+.page{padding:8px}
+.tablet{height:min(900px,calc(100vh - 16px)) !important;padding:12px;border-radius:28px}
+.screen{border-radius:19px}
+.statusbar{height:34px;padding:0 18px;font-size:13px}
+.progress-wrap{padding:4px 12px 5px}
+.progress-circle{width:25px;height:25px}
+.progress-track::before{top:12px}
+.progress-label{margin-top:3px}
+.main{gap:12px;padding:12px !important}
+.question-panel{padding:15px}
+.badge{padding:5px 10px;margin-bottom:8px;font-size:12px}
+h1{font-size:20px;margin-bottom:7px}
+.stem{font-size:14px;line-height:1.55;margin-bottom:6px}
+.options{gap:6px;margin-top:5px}
+.option{padding:10px 12px;border-radius:13px;font-size:14px;line-height:1.4}
+.bottom-actions{padding-top:9px}
+button{padding:8px 12px;font-size:14px;border-radius:12px}
+.scorebox{padding:8px 11px;font-size:14px}
+.app-header{padding:11px 14px}
+.app-title{font-size:19px}
+.app-sub{font-size:12px;margin-top:2px}
+.info-content{padding:11px;padding-bottom:11px !important}
+.card{padding:10px;margin-bottom:8px !important;border-radius:14px}
+.card h3{font-size:16px;margin-bottom:7px}
+.mini{padding:8px;border-radius:11px}
+.small{font-size:12px;line-height:1.45}
+.big-num{font-size:20px}
+.chat-button{width:50px;height:50px;font-size:19px}
+.food-card{min-height:124px;padding:8px}
+.food-card .emoji{font-size:25px}
+.food-card .name{font-size:14px}
+.task-rule{padding:10px;margin-bottom:8px}
+.nutrition-box{padding:11px}
+.analysis-dark{padding:12px;margin-top:8px}
+.fridge-unit{height:395px}
+.fridge-door-wrap{min-height:395px}
+.fridge-handle{height:210px}
+.life-goals{margin-bottom:8px}
+.life-card{height:66px}
+.life-cards{grid-auto-rows:66px}
+.life-footer{margin-top:7px}
+.mode-rules{max-width:720px;margin:16px auto 0;padding:12px 16px;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);text-align:left;color:#e0f2fe;font-size:13px;line-height:1.7}
+.mode-actions{display:flex;justify-content:center;gap:10px;margin:16px auto 0;flex-wrap:wrap}
+.mode-btn{padding:12px 22px;border-radius:999px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.32);color:#fff}
+.mode-btn.primary-mode{background:#fff;color:#1d4ed8}
+.attempt-line{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:-1px 0 7px;font-size:12px;font-weight:900;color:#64748b}
+.attempt-pill{padding:4px 8px;border-radius:999px;background:#eff6ff;color:#1d4ed8}
+.system-notice{display:none;margin-top:8px;padding:10px 12px;border-radius:12px;font-size:13px;font-weight:900;line-height:1.5}
+.system-notice.show{display:block}
+.system-notice.info{background:#eff6ff;color:#1d4ed8}
+.system-notice.warn{background:#fff7ed;color:#9a3412}
+.system-notice.error{background:#fee2e2;color:#991b1b}
+.progress-step.locked{cursor:not-allowed;opacity:.48}
+.result-panel{text-align:left;padding:12px;display:grid;gap:10px}
+.result-head{text-align:center;background:linear-gradient(135deg,#eff6ff,#fff);padding:18px;border-radius:16px}
+.result-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.result-dimension{padding:10px;border:1px solid #dbeafe;border-radius:12px;background:#fff;text-align:center}
+.result-dimension b{display:block;font-size:20px;color:#2563eb}
+.result-table{display:grid;gap:5px}
+.result-row{display:grid;grid-template-columns:42px 1fr 100px 54px;gap:6px;align-items:center;padding:7px 9px;border-radius:10px;background:#f8fafc;font-size:12px}
+.result-score{text-align:right;font-weight:900;color:#1d4ed8}
+@media(max-width:850px){
+  .page{display:block}
+  .tablet{height:auto !important;min-height:calc(100vh - 10px)}
+  .screen{height:auto;min-height:calc(100vh - 34px);overflow:visible}
+  .main:not(.single-mode){display:flex;flex-direction:column;overflow:visible}
+  .main:not(.single-mode) .question-panel,
+  .main:not(.single-mode) .info-panel{overflow:visible;min-height:auto}
+  .main:not(.single-mode) .info-content{height:auto !important;overflow:visible !important}
+  .main{padding:8px !important}
+  .result-grid{grid-template-columns:repeat(2,1fr)}
 }
 </style>
-
-
-<style id="hide-inline-feedback-v31">
-#feedback{
-  display:none !important;
-}
-.feedback,
-.feedback.show,
-.feedback.good,
-.feedback.bad{
-  display:none !important;
-  opacity:0 !important;
-  visibility:hidden !important;
-  height:0 !important;
-  min-height:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-}
-</style>
-
-
-<style id="toast-only-strong-css-v32">
-/* 強制移除題目內原本紅色/綠色解析框，只保留底部浮動提示 */
-#feedback,
-#feedback.show,
-div#feedback.feedback,
-div#feedback.feedback.show,
-.feedback#feedback,
-.feedback#feedback.show{
-  display:none !important;
-  visibility:hidden !important;
-  opacity:0 !important;
-  height:0 !important;
-  min-height:0 !important;
-  max-height:0 !important;
-  margin:0 !important;
-  padding:0 !important;
-  border:0 !important;
-  overflow:hidden !important;
-}
-
-/* 底部浮動提示固定在畫面下方 */
-.instant-feedback-toast{
-  position:fixed !important;
-  left:50% !important;
-  bottom:28px !important;
-  transform:translateX(-50%) !important;
-  z-index:99999 !important;
-  width:min(820px,calc(100% - 32px)) !important;
-  padding:18px 24px !important;
-  border-radius:24px !important;
-  box-shadow:0 18px 52px rgba(15,23,42,.30) !important;
-  font-size:22px !important;
-  line-height:1.75 !important;
-  font-weight:900 !important;
-  display:none;
-  border:2px solid transparent !important;
-  text-align:left !important;
-}
-.instant-feedback-toast.show{display:block !important;animation:toastRiseV32 .2s ease;}
-.instant-feedback-toast.good{background:#dcfce7 !important;color:#166534 !important;border-color:#86efac !important;}
-.instant-feedback-toast.bad{background:#fee2e2 !important;color:#991b1b !important;border-color:#fca5a5 !important;}
-@keyframes toastRiseV32{
-  from{opacity:0;transform:translateX(-50%) translateY(22px)}
-  to{opacity:1;transform:translateX(-50%) translateY(0)}
-}
-</style>
-
-
-<style id="q4-q6-q9-final-fix-css-v33">
-#nextBtn.ready{
-  background:#2563eb !important;
-  color:#fff !important;
-  cursor:pointer !important;
-  pointer-events:auto !important;
-  opacity:1 !important;
-}
-.screen,
-.question-panel,
-.main{
-  scroll-behavior:auto !important;
+<style id="checkout-storage-upgrade">
+/* ===== 第2、3題：真實結帳與食品收納介面 ===== */
+.checkout-hint{background:#eff6ff;border:1px solid #bfdbfe;border-radius:15px;padding:10px 12px;color:#1e3a8a;font-size:13px;font-weight:800;line-height:1.55}
+.shop-controls{width:100%;display:grid;grid-template-columns:38px 1fr 38px;gap:6px;align-items:center}
+.shop-controls button{width:38px !important;height:38px !important;padding:0 !important}
+.shop-count{height:38px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;color:#1d4ed8;font-weight:900}
+.checkout-machine{background:#fff;border:2px solid #dbeafe;border-radius:20px;padding:13px;box-shadow:0 8px 20px rgba(15,23,42,.06)}
+.checkout-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.checkout-receipt{background:#0f172a;color:#fff;border-radius:16px;padding:12px;margin-bottom:10px}
+.checkout-receipt-head{display:flex;justify-content:space-between;color:#93c5fd;font-size:12px;font-weight:900;border-bottom:1px dashed #475569;padding-bottom:7px;margin-bottom:7px}
+.receipt-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:5px 0;font-size:13px}
+.receipt-empty{color:#cbd5e1;font-size:13px;padding:5px 0}
+.coupon-ticket{background:#fffbeb;border:2px dashed #fbbf24;border-radius:15px;padding:10px 11px;margin-bottom:10px}
+.coupon-ticket.applied{background:#ecfdf5;border-color:#34d399}
+.coupon-status{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:5px}
+.coupon-rule{font-size:12px;color:#475569;line-height:1.55}
+.cash-display{display:flex;align-items:end;justify-content:space-between;background:#eff6ff;border-radius:14px;padding:10px 12px;margin:10px 0}
+.cash-display .big-num{font-size:25px}
+.cash-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:10px 0}
+.cash-token{padding:9px 4px !important;border-radius:11px !important;font-size:13px !important;background:#fff !important;border:2px solid #bfdbfe !important;color:#1e3a8a !important}
+.cash-token.note{background:#ecfdf5 !important;border-color:#86efac !important;color:#166534 !important}
+.checkout-actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.checkout-actions .confirm-pay{grid-column:1 / -1}
+.storage-progress{background:#eff6ff;border:1px solid #bfdbfe;border-radius:15px;padding:9px 11px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:900;color:#1e3a8a}
+.storage-board{display:grid;grid-template-columns:1.12fr .88fr;gap:10px;margin-bottom:10px}
+.storage-appliance{background:#fff;border:2px solid #bfdbfe;border-radius:20px;padding:10px;box-shadow:0 7px 16px rgba(37,99,235,.07)}
+.storage-appliance.pantry{border-color:#fde68a;background:#fffdf5}
+.storage-appliance-title{font-size:15px;font-weight:900;color:#1d4ed8;margin-bottom:8px}
+.storage-appliance.pantry .storage-appliance-title{color:#a16207}
+.storage-zone{min-height:108px;border:2px dashed #93c5fd;background:#f8fbff;border-radius:15px;padding:9px;margin-bottom:8px;cursor:pointer;transition:.18s}
+.storage-zone:last-child{margin-bottom:0}
+.storage-zone.room{min-height:224px;border-color:#facc15;background:#fffef6}
+.storage-zone:hover,.storage-zone.target{border-color:#2563eb;background:#eff6ff}
+.storage-zone.room:hover,.storage-zone.room.target{border-color:#ca8a04;background:#fef9c3}
+.storage-zone h3{font-size:14px;margin:0 0 2px;color:#1d4ed8}
+.storage-zone.room h3{color:#a16207}
+.storage-items{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.storage-chip{cursor:grab}
+.food-prompt{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:8px 10px;margin-bottom:9px;font-size:13px;color:#1e40af;font-weight:800}
+.drag-food{min-height:98px !important;padding:8px !important}
+.drag-food.picked{border-color:#2563eb !important;background:#eff6ff !important;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.food-clue{font-size:11px;color:#64748b;line-height:1.35;min-height:29px}
+.storage-actions{display:flex;gap:7px}
+.storage-actions button{flex:1}
+.crisis-source{display:inline-flex;margin-top:6px;padding:3px 8px;border-radius:999px;background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:900}
+.crisis-evidence{display:grid;gap:8px}
+.crisis-evidence-row{display:grid;grid-template-columns:74px 1fr;gap:8px;align-items:start;padding:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;font-size:12px;line-height:1.5}
+.crisis-evidence-row b{color:#1d4ed8}
+.crisis-choice{cursor:pointer;transition:.18s}
+.crisis-choice:hover{border-color:#60a5fa;background:#eff6ff}
+.crisis-choice.selected{border-color:#2563eb;background:#eff6ff;box-shadow:0 0 0 2px rgba(37,99,235,.12)}
+.crisis-select-count{background:#eff6ff;color:#1d4ed8;padding:7px 11px;border-radius:999px;font-size:12px;font-weight:900}
+.crisis-verified{background:#ecfdf5;border:1px solid #86efac;color:#166534;border-radius:13px;padding:9px 11px;font-size:12px;font-weight:900;line-height:1.55;margin-bottom:10px}
+button:disabled{cursor:not-allowed;opacity:.5}
+@media(max-width:850px){
+  .storage-board{grid-template-columns:1fr}
+  .storage-zone.room{min-height:110px}
 }
 </style>
 
 </head>
 <body>
 <div class="page"><div class="tablet"><div class="screen locked">
-<div class="statusbar"><div>09:18　📶 WiFi</div><div class="top-title">Smart Life 智慧生活挑戰</div><div>🔋 76%</div></div>
+<div class="statusbar"><div>05：16　📶 WiFi</div><div class="top-title">Smart Life 智慧生活挑戰</div><div>🔋 93%</div></div>
 <div class="lock-cover" id="lockCover">
   <div class="lock-cover-inner">
     <div class="lock-badge">🔒 Smart Life Challenge</div>
@@ -1366,7 +1321,7 @@ div#feedback.feedback.show,
 
     <div class="lock-subtitle">
       閱讀、數學、科學、AI 與生活決策素養整合挑戰<br>
-      請像使用平板一樣，往上滑動解鎖後開始作答。
+      請先閱讀規則，選擇模式後開始作答。
     </div>
 
     <div class="lock-info-grid">
@@ -1384,59 +1339,57 @@ div#feedback.feedback.show,
       </div>
     </div>
 
-    <div class="unlock-area" id="unlockArea" onclick="unlockCover()">
-      <div class="unlock-arrow">⌃</div>
-      <div class="unlock-text">往上滑解鎖</div>
+    <div class="mode-rules">
+      <b>作答規則</b>：一般題目最多作答兩次；第二次答錯後會保留解析，由你確認後前往下一題。第 8 題為引導式聊天室，可持續修正回應；第 9 題為個人生活規劃，完成安排與診斷即可獲得滿分。
+    </div>
+    <div class="mode-actions" id="unlockArea">
+      <button class="mode-btn primary-mode" onclick="startQuiz('assessment')">開始正式測驗</button>
+      <button class="mode-btn" onclick="startQuiz('preview')">展示預覽模式</button>
     </div>
 
-    <div class="lock-hint">點擊上方按鍵或向上滑動，即可開始第 1 題</div>
+    <div class="lock-hint">正式測驗需依序作答；展示預覽可自由切換題目。</div>
   </div>
 </div>
 <div class="progress-wrap"><div class="progress-track" id="progressTrack"></div></div>
 <div class="main">
-<section class="panel question-panel"><div class="badge" id="domainBadge"></div><h1 id="qTitle"></h1><div class="stem" id="qStem"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="bottom-actions"><button class="secondary" onclick="prevQuestion()">上一題</button><div class="scorebox">得分：<span id="score">0</span> / 100</div><button class="primary" id="nextBtn" onclick="nextQuestion()">下一題</button></div></section>
+<section class="panel question-panel"><div class="badge" id="domainBadge"></div><h1 id="qTitle"></h1><div class="attempt-line"><span id="questionCount">第 1 題 / 共 9 題</span><span class="attempt-pill" id="attemptPill">剩餘作答機會：2 次</span></div><div class="stem" id="qStem"></div><div class="options" id="options"></div><div class="feedback" id="feedback"></div><div class="system-notice" id="systemNotice"></div><div class="bottom-actions"><button class="secondary" onclick="prevQuestion()">上一題</button><div class="scorebox">得分：<span id="score">0</span> / 100</div><button class="primary" id="nextBtn" onclick="nextQuestion()">下一題</button></div></section>
 <section class="panel info-panel"><div class="app-header"><div><div class="app-title" id="appTitle"></div><div class="app-sub" id="appSub"></div></div><div style="font-size:34px" id="appIcon"></div></div><div class="info-content" id="infoContent"></div></section>
 </div>
 <div class="chatbox" id="chatbox"><div class="chat-head"><span>💬 SmartBot AI 助理</span><span style="cursor:pointer" onclick="toggleChat()">✕</span></div><div class="chat-body" id="chatBody"></div><div class="chat-actions"><button onclick="askBot('hint')">給我提示</button><button onclick="askBot('data')">提醒我看哪裡</button><button onclick="askBot('warning')">AI可能有偏誤嗎？</button><button onclick="askBot('summary')">幫我整理資訊</button></div></div>
 <div class="chat-button" onclick="toggleChat()">💬</div>
 </div></div></div>
 <script>
-
-function showInstantFeedback(message,isGood=true){
-  const fb=document.getElementById('feedback');
-  if(!fb) return;
-
-  fb.className='feedback show '+(isGood?'good':'bad');
-  fb.innerHTML=message;
-
-  // 直接浮現在目前視窗，不需要使用者往下滑
-  fb.scrollIntoView({
-    behavior:'smooth',
-    block:'center'
-  });
-
-  // 行動裝置再補一次避免被鍵盤/固定列擋住
-  setTimeout(()=>{
-    fb.scrollIntoView({
-      behavior:'smooth',
-      block:'center'
-    });
-  },180);
-}
-
 const questions=[
-{domain:'閱讀素養｜智慧超市',title:'第1題：電子傳單資訊判讀',stem:'小安是 Smart Market APP 的會員，他想購買雞胸肉和沙拉。根據右側電子傳單，哪一個敘述最正確？',app:'Smart Market APP',icon:'🛒',sub:'電子傳單與會員優惠',answer:2,options:['雞胸肉與沙拉都買二送一。','只有牛奶可以使用會員再折 5%。','雞胸肉有 9 折，會員結帳時還可再享 95 折。','沙拉沒有任何限時優惠。'],feedback:'雞胸肉標示 9 折，會員規則又說結帳可再 95 折，所以要同時讀取「傳單」和「會員規則」。',info:[`<div class="card"><h3>今日電子傳單</h3><div class="grid2"><div class="mini">🥛 牛奶<br><b>買二送一</b><br><span class="small">原價90元</span></div><div class="mini">🍗 雞胸肉<br><b>今日9折</b><br><span class="small">原價120元</span></div><div class="mini">🥗 生菜沙拉<br><b>限時折10元</b><br><span class="small">原價85元</span></div><div class="mini">🍪 餅乾<br><b>第二件半價</b><br><span class="small">原價50元</span></div></div></div>`,`<div class="card"><h3>會員結帳規則</h3><p>會員購買生鮮與健康餐盒類商品，結帳金額可再享 <b>95折</b>。</p></div>`],bot:{hint:'先確認商品優惠，再確認會員折扣。',data:'請看電子傳單與會員規則。',warning:'不要只看單一資訊來源。',summary:'雞胸肉有9折，且會員可再95折。'}},
-{domain:'數學素養｜智慧超市',title:'第2題：智慧超市付款任務',stem:'小安今天想購買兩份健康餐盒和一瓶無糖豆漿。優惠券內容：健康餐盒第二份折50元；加購無糖豆漿享半價。請加入正確商品，並使用紙鈔完成付款。',app:'Smart Market APP',icon:'🛒',sub:'智慧購物與優惠操作',operation:true,answer:270,options:[],feedback:'正確流程是加入2份健康餐盒與1瓶無糖豆漿，套用優惠券後，餐盒為150＋100＝250元，豆漿半價為20元，因此總金額為270元。',info:[],bot:{hint:'先加入2份餐盒和1瓶豆漿，再使用優惠券付款。',data:'優惠券：第二份餐盒折50元，豆漿半價。',warning:'若加入誤導商品，付款會失敗。',summary:'餐盒150+100，豆漿20，總共270元。'}},
-{domain:'科學素養｜智慧超市',title:'第3題：智慧冰箱空間管理',stem:'小安回家後，準備把剛買的食品放進智慧冰箱。請協助他將食品放到最適合的位置，避免食品變質。',app:'Smart Fridge AI',icon:'🧊',sub:'智慧冰箱與食品安全',fridgeTask:true,answer:{top:['牛奶','生菜','優格','起司'],freezer:['水餃','冰淇淋','鮭魚排','雞塊'],room:['餅乾','麵包','罐頭','泡麵']},options:['牛奶','生菜','優格','起司','水餃','冰淇淋','鮭魚排','雞塊','餅乾','麵包','罐頭','泡麵'],feedback:'冷藏食品、冷凍食品與常溫食品都放到適合位置後，食品保存較安全。',info:[],bot:{hint:'先判斷哪些食品需要低溫保存。',data:'冷藏、冷凍、常溫三區都要用。',warning:'有些食物看起來相似，但保存方式不同。',summary:'乳品與蔬菜冷藏；水餃、冰淇淋、魚排、雞塊冷凍；乾燥密封食品常溫。'}},
-{domain:'AI互動情境｜AI健康餐廳',title:'第4題：AI健康餐搭配挑戰',stem:'小安想利用 AI 健康餐系統搭配一份符合條件的晚餐。請在預算與營養限制下，搭配出唯一最佳的餐點組合。',app:'AI Nutrition Lab',icon:'🥗',sub:'AI健康分析與營養搭配',nutritionTask:true,multi:true,answer:[4,2],options:['🥩 雞胸肉','🥗 生菜沙拉','🥛 無糖豆漿','🍙 鮪魚飯糰','🌯 雞肉捲餅','🥣 燕麥飲','🍟 薯條','🥚 水煮蛋'],feedback:'唯一最佳解需同時符合預算、糖分、蛋白質與熱量限制。最佳組合是「雞肉捲餅＋無糖豆漿」。',info:[],bot:{hint:'不要只看健康直覺，要同時計算四個條件。',data:'請比較蛋白質、熱量、糖分與價格。',warning:'看起來健康的食物不一定是最佳解。',summary:'最佳組合為「雞肉捲餅＋無糖豆漿」。'}},
+{domain:'閱讀素養｜智慧超市',title:'第1題：電子傳單資訊判讀',stem:'小安是 Smart Market APP 的會員，他想購買雞胸肉和沙拉。根據右側電子傳單，哪一個敘述最正確？',app:'Smart Market APP',icon:'🛒',sub:'電子傳單與會員優惠',answer:2,options:['雞胸肉與沙拉都買二送一。','只有牛奶可以使用會員再折 5%。','雞胸肉有 9 折，會員結帳時還可再享 95 折。','沙拉沒有任何限時優惠。'],feedback:'雞胸肉標示 9 折，會員規則又說結帳可再 95 折，所以要同時讀取「傳單」和「會員規則」。',info:[`<div class="card"><h3>今日電子傳單</h3><div class="grid2"><div class="mini">🥛 牛奶<br><b>買二送一</b><br><span class="small">原價90元</span></div><div class="mini">🍗 雞胸肉<br><b>今日9折</b><br><span class="small">原價120元</span></div><div class="mini">🥗 生菜沙拉<br><b>限時折10元</b><br><span class="small">原價85元</span></div><div class="mini">🍪 餅乾<br><b>第二件半價</b><br><span class="small">原價50元</span></div></div></div>`,`<div class="card"><h3>會員結帳規則</h3><p>會員購買生鮮與健康餐盒類商品，結帳金額可再享 <b>95折</b>。</p></div>`],bot:{hint:'先確認商品優惠，再確認會員折扣。',data:'請對照傳單與會員規則中的商品分類。',warning:'不要只看單一資訊來源。',summary:'請將商品本身的促銷與會員規則一起比對，再選擇敘述。'}},
+{domain:'數學素養｜智慧超市',title:'第2題：智慧超市付款任務',stem:'小安今天想購買兩份健康餐盒和一瓶無糖豆漿。優惠券內容：健康餐盒第二份折50元；加購無糖豆漿享半價。請加入正確商品，自行計算折扣後金額，並使用現金完成付款。',app:'Smart Market APP',icon:'🛒',sub:'現金結帳與優惠判讀',operation:true,answer:270,options:[],feedback:'正確流程是加入2份健康餐盒與1瓶無糖豆漿，套用優惠券後，餐盒為150＋100＝250元，豆漿半價為20元，因此投入現金總額為270元。',info:[],bot:{hint:'先加入2份餐盒和1瓶豆漿，再使用優惠券與現金付款。',data:'優惠券：第二份餐盒折50元，豆漿半價。',warning:'若加入誤導商品，或投入現金錯誤，付款會失敗。',summary:'餐盒150+100，豆漿20，總共270元。'}},
+{domain:'科學素養｜智慧超市',title:'第3題：食品保存收納任務',stem:'小安回家後，要將買回來的食品放進智慧冰箱或食品收納櫃。請依照保存需求，將食品放到最適合的位置，避免食品變質。',app:'Smart Storage AI',icon:'🧊',sub:'冰箱與食品櫃保存分類',fridgeTask:true,answer:{top:['牛奶','生菜','優格','起司'],freezer:['水餃','冰淇淋','鮭魚排','雞塊'],room:['餅乾','麵包','罐頭','泡麵']},options:['牛奶','生菜','優格','起司','水餃','冰淇淋','鮭魚排','雞塊','餅乾','麵包','罐頭','泡麵'],feedback:'需冷藏、冷凍與可存放於食品櫃的食品都分類正確，食品保存較安全。',info:[],bot:{hint:'先判斷哪些食品需要低溫保存，哪些可留在食品櫃。',data:'智慧冰箱有冷藏與冷凍區；乾燥密封食品可放食品收納櫃。',warning:'常溫食品不需要放進冰箱中。',summary:'乳品與蔬菜冷藏；水餃、冰淇淋、魚排、雞塊冷凍；乾燥密封食品放入食品櫃。'}},
+{domain:'AI互動情境｜AI健康餐廳',title:'第4題：AI健康餐搭配挑戰',stem:'小安想利用 AI 健康餐系統搭配一份符合條件的晚餐。請在預算與營養限制下，搭配出唯一最佳的餐點組合。',app:'AI Nutrition Lab',icon:'🥗',sub:'AI健康分析與營養搭配',nutritionTask:true,multi:true,answer:[4,2],options:['🥩 雞胸肉','🥗 生菜沙拉','🥛 無糖豆漿','🍙 鮪魚飯糰','🌯 雞肉捲餅','🥣 燕麥飲','🍟 薯條','🥚 水煮蛋'],feedback:'唯一最佳解需同時符合預算、糖分、蛋白質與熱量限制。最佳組合是「雞肉捲餅＋無糖豆漿」。',info:[],bot:{hint:'不要只看健康直覺，要同時計算四個條件。',data:'請比較蛋白質、熱量、糖分與價格。',warning:'看起來健康的食物不一定是最佳解。',summary:'先排除超出任一限制的組合，再比較剩下組合是否同時符合四項條件。'}},
 {domain:'數學＋資料判讀｜AI健康週報',title:'第5題：AI健康週報判讀挑戰',stem:'AI Health Watch 整理了小安一週的步數、睡眠與疲勞指數。請根據右側週報，選出最合理的兩項 AI 判讀。',app:'AI Health Watch',icon:'📊',sub:'健康數據交叉判讀',multi:true,answer:[1,2],options:['星期三最健康，因為它的步數最高。','星期四最需要改善，因為步數低且疲勞指數最高。','星期五雖然不是步數最高，但整體狀態最好。','只要步數高，睡眠不足就不會影響疲勞。','AI 應建議小安優先喝能量飲料來降低疲勞。'],feedback:'星期四步數低、睡眠不足且疲勞最高，最需要改善；星期五睡眠充足、疲勞最低，整體狀態最好。',info:[`<div class="card"><h3>🎯 AI 健康目標</h3><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><div class="mini">每日步數<br><span class="big-num">≥7000</span></div><div class="mini">睡眠時間<br><span class="big-num">≥7h</span></div><div class="mini">疲勞指數<br><span class="big-num">＜60</span></div></div></div><div class="card"><h3>📊 一週健康資料</h3><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;text-align:center;font-weight:800"><tr style="background:#eff6ff"><th style="padding:10px;border:1px solid #dbeafe">日期</th><th style="padding:10px;border:1px solid #dbeafe">步數</th><th style="padding:10px;border:1px solid #dbeafe">睡眠</th><th style="padding:10px;border:1px solid #dbeafe">疲勞</th></tr><tr><td style="padding:8px;border:1px solid #dbeafe">一</td><td>5000</td><td>7.0h</td><td>40</td></tr><tr><td style="padding:8px;border:1px solid #dbeafe">二</td><td>6500</td><td>6.5h</td><td>50</td></tr><tr><td style="padding:8px;border:1px solid #dbeafe">三</td><td style="color:#2563eb">9000</td><td style="color:#dc2626">5.2h</td><td style="color:#dc2626">72</td></tr><tr><td style="padding:8px;border:1px solid #dbeafe">四</td><td style="color:#dc2626">4200</td><td style="color:#dc2626">5.8h</td><td style="color:#dc2626">78</td></tr><tr><td style="padding:8px;border:1px solid #dbeafe">五</td><td>7800</td><td style="color:#16a34a">7.5h</td><td style="color:#16a34a">35</td></tr></table></div></div>`],bot:{hint:'不要只看步數，還要一起看睡眠和疲勞。',data:'星期三步數最高，但睡眠不足且疲勞偏高。',warning:'單一數據可能造成誤判，要做交叉判讀。',summary:'星期四最需要改善；星期五整體狀態最好。'}},
 {domain:'AI決策＋健康素養｜AI 健康行程規劃',title:'第6題：AI 疲勞恢復計畫挑戰',stem:'AI 助理根據小安今天的生活紀錄，提出 6 種改善方案。請依照「最有效 → 最不建議」重新排序。',app:'AI Recovery Planner',icon:'🧠',sub:'AI健康決策與疲勞恢復',sorting:true,answer:['今晚提早睡覺 2 小時','睡前停止滑手機','晚餐後散步 30 分鐘','下午多喝水','補充高糖能量飲料','熬夜打遊戲後隔天再補眠'],options:['補充高糖能量飲料','今晚提早睡覺 2 小時','下午多喝水','熬夜打遊戲後隔天再補眠','晚餐後散步 30 分鐘','睡前停止滑手機'],feedback:'優先改善睡眠與作息問題，通常比短暫提神更能真正恢復疲勞。',info:[`<div class="card"><h3>📋 AI 今日分析</h3><div class="grid2"><div class="mini">😴 睡眠<br><span class="big-num" style="color:#dc2626">5.1h</span></div><div class="mini">📱 睡前滑手機<br><span class="big-num" style="color:#dc2626">2h</span></div><div class="mini">🚶 活動量<br><span class="big-num">偏低</span></div><div class="mini">💧 喝水量<br><span class="big-num">不足</span></div></div></div><div class="card"><h3>🧪 科學提醒</h3><p>✔️ 規律睡眠與減少藍光刺激，有助於降低疲勞。</p><p>✔️ 高糖與高咖啡因只能短暫提神。</p><p>✔️ 運動與補水能改善精神狀態。</p></div><div class="card"><h3>🎯 排序目標</h3><p>請綜合判斷「根本改善疲勞」與「短暫效果」之差異。</p></div>`],bot:{hint:'優先處理造成疲勞的根本原因。',data:'睡眠不足與滑手機時間偏高。',warning:'短暫提神不代表真正恢復疲勞。',summary:'調整睡眠與生活習慣，比依賴能量飲料更有效。'}},
-{domain:'媒體素養＋AI監控｜智慧城市資訊中心',title:'第7題：AI 城市危機決策',stem:'智慧城市系統同時收到 4 則事件通報，但市府只能優先處理其中一件。請閱讀各事件資訊後，選出「最需要立即處理」的事件。',app:'Smart City Crisis Center',icon:'🚨',sub:'AI 即時決策與城市危機判讀',crisisTask:true,answer:2,stage2Answer:0,stage3Answer:0,options:['捷運站手扶梯故障｜目前已停止使用｜無人受傷','市中心 AQI 升高至 95｜系統建議減少戶外活動','化學工廠附近 AQI 310｜空氣品質突然變成危險等級｜附近有學校','商場停車場車流壅塞｜等待時間增加 10 分鐘'],stage2Options:['立即疏散附近學校與居民','先等待 30 分鐘再觀察','於社群媒體發文即可','關閉全市所有道路'],stage3Options:['同步通知環保局、消防局與附近學校','只通知媒體發布新聞稿','先刪除異常資料避免恐慌','只要求市民自行戴口罩'],feedback:'完成三階段危機決策：先鎖定高風險事件，再啟動疏散，最後同步通知相關單位。',info:[`<div class="card"><h3>🚨 城市事件總覽</h3><p class="small">AI 系統正在協助市府判斷優先處理順序。</p><div style="display:grid;gap:12px;margin-top:14px"><div class="mini"><b>🛗 捷運設備異常</b><br><span class="small">手扶梯已停用，現場無人受傷。</span></div><div class="mini"><b>🌫️ 空氣品質升高</b><br><span class="small">AQI 95，建議減少長時間戶外活動。</span></div><div class="mini"><b>☣️ 化學工廠異常</b><br><span style="font-weight:900">AQI 310｜空氣品質突然達危險等級</span><br><span class="small">附近有國小與住宅區。</span></div><div class="mini"><b>🚗 停車場壅塞</b><br><span class="small">等待時間增加約 10 分鐘。</span></div></div></div><div class="card"><h3>🎯 AI 判讀任務</h3><ul style="line-height:1.9"><li>比較事件影響範圍</li><li>比較危險程度</li><li>判斷是否可能危害市民安全</li></ul></div>`],bot:{hint:'先找出「立即危害安全」的事件。',data:'其中一個事件可能影響附近居民與學生。',warning:'不是所有異常事件都需要最高優先處理。',summary:'高風險且可能影響大量市民的事件應優先處理。'}},
+{domain:'媒體素養＋AI監控｜智慧城市資訊中心',title:'第7題：AI 城市風險證據判讀',stem:'智慧城市系統收到多項通報。請先比較資料來源、風險發展與已採取措施，找出需優先處理的事件；再選擇立即行動與可公開發布的查證資訊。',app:'Smart City Evidence Center',icon:'🚨',sub:'風險資料、即時防護與查證公告',crisisTask:true,answer:1,stage2Answers:[0,1],stage3Answer:1,options:['校園附近聞到異味｜3 則社群貼文回報｜附近感測器目前未顯示異常','化工區下風處空氣惡化｜感測器 15 分鐘內 AQI 由 70 升至 180｜風向朝住宅區與國小','醫院啟動備用發電｜可維持運作 2 小時｜維修人員已抵達現場','捷運出口積水｜出口已封閉｜乘客已完成改道疏散'],stage2Options:['通知附近學校暫停戶外活動並啟動室內防護','請環保與消防單位確認污染來源、風向與警戒範圍','立即發布「化工廠爆炸」消息要求全市撤離','等待社群媒體出現更多照片後再處理'],stage3Options:['「化工廠已發生爆炸，請全市立即撤離。」','「感測資料顯示化工區下風處空品快速惡化；市府已啟動附近校園防護與現場查證，請留意官方更新。」','「網友回報疑似異味，請市民自行判斷是否撤離。」','「目前資訊尚未完全確定，因此市府暫不提供任何公告。」'],feedback:'完成三階段證據判讀：根據可信的趨勢資料辨識風險，同步採取防護與查證行動，最後發布不誇大且能保護市民的資訊。',info:[],bot:{hint:'不是數字最大就一定最急迫；請比較來源可信度、風險是否正在擴大，以及既有控制措施。',data:'感測器趨勢、風向與附近脆弱族群，是判斷優先處理的重要證據。',warning:'AI 與社群通報都可能不完整；緊急防護可以先做，但公開公告不應宣稱未查證原因。',summary:'先找可信且正在擴大的風險，再同步保護居民與確認來源，最後公布已確認資訊。'}},
 {domain:'AI 溝通素養｜智慧城市 AI 助理',title:'第8題：AI 市長聊天室',stem:'你是智慧城市值班市長。AI 助理與市民正在聊天室中回報突發事件，請選擇最適合的回應。',app:'Smart City Chat',icon:'💬',sub:'AI 對話判讀與城市決策',chatTask:true,answer:1,options:['優先恢復商場燈光，避免民眾抱怨','先確認醫院與捷運是否正常運作','先發文安撫民眾，不需要檢查基礎設施','全面關閉所有公共服務'],feedback:'危機發生時，應優先確認醫療、交通等核心基礎設施是否正常。',info:[`<div class="card"><h3>📱 AI 城市聊天室</h3><p>AI 正協助市府整理市民通報與即時資訊。</p></div>`],bot:{hint:'先確認哪些設施與生命安全最相關。',data:'醫院與交通系統通常屬於優先維持項目。',warning:'不能只優先考量商業與娛樂需求。',summary:'先確認核心基礎設施是否正常。'}},
-{domain:'AI生活素養｜24小時智慧人生',title:'第9題：AI智慧人生模擬器',stem:'請幫小安安排一天的生活。先選擇生活目標，再把活動拖曳到時間格。完成後按下「AI診斷鍵」，系統才會分析健康、幸福感、思考力、時間管理與AI依賴度。這題沒有唯一答案，重點是做出合理且有自我管理能力的選擇。',app:'Smart Life Planner AI',icon:'🕒',sub:'自由搭配你的24小時',lifeTask:true,answer:'balanced',options:[],feedback:'好的智慧生活不是只追求單一數值，而是能在學習、健康、休息、時間管理與AI使用之間取得平衡。',info:[],bot:{hint:'先選目標，再安排一天，不用急著看分析。',data:'安排完成後按下AI診斷鍵，系統會一次分析結果。',warning:'高快樂不一定代表長期健康；AI方便也可能降低自主思考。',summary:'平衡的一天通常包含學習、運動、休息、健康飲食與適度娛樂。'}}
+{domain:'AI生活素養｜24小時智慧人生',title:'第9題：AI智慧人生模擬器',stem:'請依照自己的生活情形安排一天。先選擇生活目標，再把活動拖曳到時間格；同一活動可依實際需要重複安排。完成後按下「AI診斷鍵」，系統會提供生活觀察與建議。這題沒有唯一答案，只要完成安排與診斷即可獲得滿分。',app:'Smart Life Planner AI',icon:'🕒',sub:'自由搭配你的24小時',lifeTask:true,answer:'completed',options:[],feedback:'每個人的生活安排不同；完成自我規劃並閱讀 AI 診斷建議，即完成本題。',info:[],bot:{hint:'依你的日常情形安排活動，同一項活動也可以重複出現。',data:'至少安排一項活動後按下 AI 診斷鍵，系統會提供觀察建議。',warning:'診斷內容供你反思調整，不會影響本題滿分。',summary:'本題重點是表達自己的生活安排並閱讀回饋，沒有標準答案。'}}
 ];
-let current=0,activeFridgeTab=0;let fridgeOpenedOnce=false;let selected=Array(questions.length).fill(null);let checked=Array(questions.length).fill(false);let sortingAttempted=Array(questions.length).fill(false);let retrySolved=Array(questions.length).fill(false);let cart={meal:0,milk:0,fries:0,tea:0,choco:0,sandwich:0};let payment=0;let couponApplied=false;const retryQuestions=[2,5,6]; const scoreMap=[11,11,11,11,11,11,11,11,12];
+let current=0,activeFridgeTab=0;let fridgeOpenedOnce=false;let fridgePending=null;let selected=Array(questions.length).fill(null);let checked=Array(questions.length).fill(false);let wrongAttempts=Array(questions.length).fill(0);let retrySolved=Array(questions.length).fill(false);let specialScores=Array(questions.length).fill(null);let furthestUnlocked=0;let quizMode='assessment';let cart={meal:0,milk:0,fries:0,tea:0,choco:0,sandwich:0};let payment=0;let couponApplied=false;const scoreMap=[11,11,11,11,11,11,11,11,12];
 const productNames={meal:'🥗 健康餐盒',milk:'🥛 無糖豆漿',fries:'🍟 薯條',tea:'🧋 珍珠奶茶',choco:'🍫 巧克力',sandwich:'🥪 三明治'};
+const productPrices={meal:150,milk:40,fries:65,tea:75,choco:45,sandwich:80};
+function startQuiz(mode){quizMode=mode;unlockCover()}
+function showNotice(message,tone='info'){const box=document.getElementById('systemNotice');if(!box)return;box.className='system-notice show '+tone;box.textContent=message}
+function clearNotice(){const box=document.getElementById('systemNotice');if(box){box.className='system-notice';box.textContent=''}}
+function advanceQuestion(){if(current<questions.length-1){current++;furthestUnlocked=Math.max(furthestUnlocked,current);render()}else{showResult()}}
+function finishWrongAttempt(message){
+wrongAttempts[current]++;
+retrySolved[current]=true;
+if(wrongAttempts[current]<2){
+showNotice(message+' 你還有 1 次重新作答機會。','warn');
+renderOptions();renderFeedback();updateScore();updateAttemptDisplay();
+return false;
+}
+checked[current]=true;
+renderOptions();renderFeedback();updateScore();updateAttemptDisplay();
+showNotice(message+' 已使用兩次作答機會，請閱讀解析後按「下一題」繼續。','error');
+return true;
+}
 function render(){
 renderProgress();
 const q=questions[current];
@@ -1447,11 +1400,15 @@ if(q.nutritionTask||q.switchTask||q.lifeTask){
   main.classList.remove('single-mode')
 }
 document.getElementById('domainBadge').textContent=q.domain;
+document.querySelector('.top-title').textContent='Smart Life 智慧生活挑戰｜'+(quizMode==='assessment'?'正式測驗':'展示預覽');
 document.getElementById('qTitle').textContent=q.title;
 document.getElementById('qStem').textContent=q.stem;
 document.getElementById('appTitle').textContent=q.app;
 document.getElementById('appIcon').textContent=q.icon;
 document.getElementById('appSub').textContent=q.sub;
+document.getElementById('questionCount').textContent=`第 ${current+1} 題 / 共 ${questions.length} 題`;
+updateAttemptDisplay();
+clearNotice();
 updateFinalNextButton();
 renderInfo();
 renderOptions();
@@ -1459,59 +1416,21 @@ renderFeedback();
 updateScore();
 resetChat();
 }
-function renderInfo(){const q=questions[current];const info=document.getElementById('infoContent');if(q.crisisTask){info.innerHTML=`<div class="card"><h3>🧠 AI 判讀任務</h3><ul style="line-height:1.9"><li>比較事件影響範圍</li><li>比較危險程度</li><li>判斷是否可能立即危害市民安全</li></ul></div><div class="card"><h3>📌 判讀提醒</h3><p>不是所有異常事件都需要最高優先處理，請比較「影響人數」與「危險程度」。</p></div>`;return;}info.innerHTML=q.info?.[0]||'';if(q.simulation)setTimeout(updateSim,0)}
-function renderOptions(){const q=questions[current];const box=document.getElementById('options');box.innerHTML='';if(q.operation)return renderShopTask(box);if(q.lifeTask)return renderLifeTask(box,q);if(q.fridgeTask)return renderFridgeTask(box);if(q.nutritionTask)return renderNutritionTask(box);if(q.switchTask)return renderSwitchTask(box,q);if(q.monitorTask)return renderMonitorTask(box,q);if(q.chatTask)return renderChatTask(box,q);if(q.powerTask)return renderPowerTask(box,q);if(q.boardGame)return renderBoardGame(box,q);if(q.sorting)return renderSorting(box,q);if(q.crisisTask)return renderCrisisTask(box,q);if(q.alertTask)return renderAlertTask(box,q);if(q.monitorTask)return renderMonitorTask(box,q);if(q.factDrag)return renderFactCheck(box,q);renderChoiceOptions(box,q)}
-function renderShopTask(box){box.innerHTML=`<div class="shop-grid"><div class="shop-item"><div class="shop-emoji">🥗</div><div class="shop-title">健康餐盒</div><div class="shop-price">150元</div><button onclick="addCart('meal')">加入</button></div><div class="shop-item"><div class="shop-emoji">🍟</div><div class="shop-title">薯條</div><div class="shop-price">65元</div><button onclick="addCart('fries')">加入</button></div><div class="shop-item"><div class="shop-emoji">🧋</div><div class="shop-title">珍珠奶茶</div><div class="shop-price">75元</div><button onclick="addCart('tea')">加入</button></div><div class="shop-item"><div class="shop-emoji">🥛</div><div class="shop-title">無糖豆漿</div><div class="shop-price">40元</div><button onclick="addCart('milk')">加入</button></div></div>`;document.getElementById('infoContent').innerHTML=`<div class="card" style="background:linear-gradient(180deg,#ffffff,#f8fbff);border:2px solid #dbeafe"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div><h3 style="margin:0">🧾 Smart 結帳櫃台</h3><div class="small">請確認商品、優惠與付款金額</div></div><div style="font-size:42px">💳</div></div><div style="background:#0f172a;color:#fff;border-radius:18px;padding:14px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-weight:800;margin-bottom:8px"><span>已選商品</span><span>${Object.values(cart).reduce((a,b)=>a+b,0)} 件</span></div><div id="cartLines" style="line-height:2;font-size:15px">${cartLines()}</div></div><div class="grid2"><div class="mini">🎟️ 優惠券<br><span class="big-num" style="font-size:20px;color:${couponApplied?'#16a34a':'#64748b'}">${couponApplied?'已套用':'未使用'}</span></div><div class="mini">💰 目前付款<br><span id="payTotal" class="big-num">${payment}</span></div></div><button class="primary" onclick="applyCoupon()" style="width:100%;margin-top:12px">套用優惠券</button><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px"><button onclick="addMoney(10)">10元</button><button onclick="addMoney(50)">50元</button><button onclick="addMoney(100)">100元</button><button onclick="addMoney(500)">500元</button></div><div style="display:flex;gap:7px;margin-top:14px"><button class="secondary" onclick="clearCart()" style="flex:1">↺ 重設</button><button class="primary" onclick="submitPayment()" style="flex:1">✅ 確認付款</button></div></div>`}
-function renderFridgeTask(box){
-document.getElementById('infoContent').innerHTML=`
-<div class="fridge-door-wrap">
-  <div class="fridge-unit" id="fridgeUnit">
-    <div class="fridge-mini-guide">🧊 點擊冰箱門打開，再把食物拖進正確區域</div>
-
-    <div class="fridge-inside">
-      <div class="fridge-shelf" ondrop="dropFood(event,'top')" ondragover="allowDrop(event)">
-        <h3>🧊 冷藏區</h3>
-        <div class="small">乳品、蔬菜、冷藏食品</div>
-        <div id="topBox" class="fridge-shelf-items"></div>
-      </div>
-
-      <div class="fridge-shelf" ondrop="dropFood(event,'freezer')" ondragover="allowDrop(event)">
-        <h3>❄️ 冷凍庫</h3>
-        <div class="small">需長期低溫保存食品</div>
-        <div id="freezerBox" class="fridge-shelf-items"></div>
-      </div>
-
-      <div class="fridge-shelf" ondrop="dropFood(event,'room')" ondragover="allowDrop(event)">
-        <h3>🗄️ 常溫櫃</h3>
-        <div class="small">乾燥、密封、可常溫保存食品</div>
-        <div id="roomBox" class="fridge-shelf-items"></div>
-      </div>
-    </div>
-
-    <div class="fridge-door" onclick="openFridgeDoor()">
-      <div class="fridge-handle"></div>
-      <div class="fridge-door-title">智慧冰箱</div>
-      <div class="fridge-door-sub">點一下打開冰箱門</div>
-      <div style="font-size:44px;margin-top:10px">🧊</div>
-    </div>
-
-    <div class="fridge-complete">
-      <button class="secondary" onclick="resetFridgeTask()">重新收納</button>
-      <button class="primary" onclick="checkFridgeTask()">完成收納</button>
-    </div>
-  </div>
-</div>
-<div id="fridgeFeedback"></div>
-`;
-box.innerHTML=`<div class="food-list">${questions[current].options.filter(op=>!(selected[current]&&selected[current][op])).map(op=>`<div class="drag-food" draggable="true" ondragstart="dragFood(event,'${op}')"><div style="font-size:28px">${foodEmoji(op)}</div><b>${op}</b></div>`).join('')}</div>`;
-renderFridgePreview();
-
-if(fridgeOpenedOnce){
-  const fridge=document.getElementById('fridgeUnit');
-  if(fridge){
-    fridge.classList.add('open');
-  }
+function updateAttemptDisplay(){const pill=document.getElementById('attemptPill');if(!pill)return;const q=questions[current];if(q.chatTask&&!checked[current]){pill.textContent=wrongAttempts[current]>0?`引導式對話｜已提供 ${wrongAttempts[current]} 次修正提示`:'引導式對話｜可持續修正';return}const remaining=Math.max(0,2-wrongAttempts[current]);pill.textContent=checked[current]?`本題完成｜得分 ${questionScore(current)} 分`:`剩餘作答機會：${remaining} 次${retrySolved[current]?'｜最高 5 分':''}`}
+function renderInfo(){const q=questions[current];const info=document.getElementById('infoContent');if(q.crisisTask){info.innerHTML=`<div class="card"><h3>📡 證據判讀板</h3><div class="crisis-evidence"><div class="crisis-evidence-row"><b>可信度</b><span>官方感測器與現場單位通報，通常比未查證社群貼文更可作為行動依據。</span></div><div class="crisis-evidence-row"><b>迫切性</b><span>風險快速升高，且朝學校或住宅擴散時，需優先保護民眾。</span></div><div class="crisis-evidence-row"><b>回應原則</b><span>可先採取安全防護與查證；對外公告只能描述已確認資訊。</span></div></div></div><div class="card"><h3>🎯 三階段任務</h3><p class="small">1. 判斷最需優先處理的事件</p><p class="small">2. 選擇兩項立即且負責任的行動</p><p class="small">3. 選擇可公開發布的查證公告</p></div>`;return;}info.innerHTML=Array.isArray(q.info)?q.info.join(''):'';if(q.simulation)setTimeout(updateSim,0)}
+function renderOptions(){const q=questions[current];const box=document.getElementById('options');box.innerHTML='';if(q.operation)return renderShopTask(box);if(q.lifeTask)return renderLifeTask(box,q);if(q.fridgeTask)return renderFridgeTask(box);if(q.nutritionTask)return renderNutritionTask(box);if(q.switchTask)return renderSwitchTask(box,q);if(q.monitorTask)return renderMonitorTask(box,q);if(q.chatTask)return renderChatTask(box,q);if(q.powerTask)return renderPowerTask(box,q);if(q.boardGame)return renderBoardGame(box,q);if(q.sorting)return renderSorting(box,q);if(q.crisisTask)return renderCrisisTask(box,q);if(q.alertTask)return renderAlertTask(box,q);if(q.factDrag)return renderFactCheck(box,q);renderChoiceOptions(box,q)}
+function renderShopTask(box){
+const products=[['meal','🥗','健康餐盒',150],['fries','🍟','薯條',65],['tea','🧋','珍珠奶茶',75],['milk','🥛','無糖豆漿',40]];
+const disabled=checked[current]?'disabled':'';
+box.innerHTML=`<div class="checkout-hint">請選購指定商品，套用優惠券後自行計算應付金額，再投入正確的現金。</div><div class="shop-grid">${products.map(([key,emoji,name,price])=>`<div class="shop-item"><div class="shop-emoji">${emoji}</div><div class="shop-title">${name}</div><div class="shop-price">${price}元</div><div class="shop-controls"><button class="secondary" onclick="changeCart('${key}',-1)" ${disabled}>−</button><div class="shop-count">${cart[key]}</div><button onclick="changeCart('${key}',1)" ${disabled}>＋</button></div></div>`).join('')}</div>`;
+document.getElementById('infoContent').innerHTML=`<div class="checkout-machine"><div class="checkout-head"><div><h3 style="margin:0">🧾 自助結帳機</h3><div class="small">確認明細、讀取優惠，再投入現金</div></div><div style="font-size:36px">💵</div></div><div class="checkout-receipt"><div class="checkout-receipt-head"><span>電子發票明細</span><span>${Object.values(cart).reduce((a,b)=>a+b,0)} 件</span></div>${cartLines()}</div><div class="coupon-ticket ${couponApplied?'applied':''}"><div class="coupon-status"><span>🎟️ 優惠券</span><span style="color:${couponApplied?'#059669':'#b45309'}">${couponApplied?'✓ 已套用':'尚未使用'}</span></div><div class="coupon-rule">健康餐盒第二份折 50 元<br>加購無糖豆漿享半價</div><button class="primary" onclick="applyCoupon()" style="width:100%;margin-top:8px" ${couponApplied||checked[current]?'disabled':''}>${couponApplied?'優惠券已套用':'套用優惠券'}</button></div><div class="small" style="font-weight:900">請自行計算折扣後金額，投入紙鈔或硬幣：</div><div class="cash-display"><div class="small">已投入現金</div><span id="payTotal" class="big-num">$${payment}</span></div><div class="cash-pad"><button class="cash-token" onclick="addMoney(10)" ${disabled}>🪙 $10</button><button class="cash-token" onclick="addMoney(50)" ${disabled}>🪙 $50</button><button class="cash-token note" onclick="addMoney(100)" ${disabled}>💵 $100</button><button class="cash-token note" onclick="addMoney(500)" ${disabled}>💵 $500</button></div><div class="checkout-actions"><button class="secondary" onclick="clearPayment()" ${disabled}>清除投入</button><button class="secondary" onclick="clearCart()" ${disabled}>全部重設</button><button class="primary confirm-pay" onclick="submitPayment()" ${disabled}>確認付款</button></div></div>`;
 }
+function renderFridgeTask(box){
+const q=questions[current],s=selected[current]||{},placed=Object.keys(s).length;
+const clues={牛奶:'開封後需低溫保存',生菜:'新鮮蔬菜',優格:'乳製冷藏品',起司:'乳製食品',水餃:'冷凍包裝',冰淇淋:'需保持結凍',鮭魚排:'冷凍生鮮',雞塊:'冷凍調理品',餅乾:'乾燥密封',麵包:'短期常溫',罐頭:'未開封',泡麵:'乾燥包裝'};
+document.getElementById('infoContent').innerHTML=`<div class="storage-progress"><span>📦 已收納 <span id="fridgePlacedCount">${placed}</span> / ${q.options.length} 項</span><span id="fridgeRemaining">${q.options.length-placed===0?'全部完成':'尚有 '+(q.options.length-placed)+' 項'}</span></div><div class="storage-board"><div class="storage-appliance"><div class="storage-appliance-title">🧊 智慧冰箱</div><div class="storage-zone ${fridgePending?'target':''}" data-place="top" onclick="placeSelectedFood('top')" ondrop="dropFood(event,'top')" ondragover="allowDrop(event)"><h3>冷藏區</h3><div class="small">低溫保鮮食品</div><div id="topBox" class="storage-items"></div></div><div class="storage-zone ${fridgePending?'target':''}" data-place="freezer" onclick="placeSelectedFood('freezer')" ondrop="dropFood(event,'freezer')" ondragover="allowDrop(event)"><h3>冷凍區</h3><div class="small">需維持結凍食品</div><div id="freezerBox" class="storage-items"></div></div></div><div class="storage-appliance pantry"><div class="storage-appliance-title">🗄️ 食品收納櫃</div><div class="storage-zone room ${fridgePending?'target':''}" data-place="room" onclick="placeSelectedFood('room')" ondrop="dropFood(event,'room')" ondragover="allowDrop(event)"><h3>常溫區</h3><div class="small">乾燥、未開封食品</div><div id="roomBox" class="storage-items"></div></div></div></div><div class="storage-actions"><button class="secondary" id="fridgeResetBtn" onclick="resetFridgeTask()" ${checked[current]?'disabled':''}>重新整理</button><button class="primary" id="fridgeSubmitBtn" onclick="checkFridgeTask()" ${checked[current]||placed<q.options.length?'disabled':''}>完成收納</button></div><div id="fridgeFeedback"></div>`;
+box.innerHTML=`<div class="food-prompt">${fridgePending?`已選擇 ${foodEmoji(fridgePending)} ${fridgePending}，請點選右側適合的收納區。`:'拖曳食品到右側，或先點選食品再點選收納位置。'}</div><div class="food-list">${q.options.filter(op=>!s[op]).map(op=>`<div class="drag-food ${fridgePending===op?'picked':''}" data-food="${op}" tabindex="0" role="button" draggable="true" onclick="selectFridgeFood('${op}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectFridgeFood('${op}')}" ondragstart="dragFood(event,'${op}')"><div style="font-size:27px">${foodEmoji(op)}</div><b>${op}</b><div class="food-clue">${clues[op]}</div></div>`).join('')||'<div class="feedback show good" style="display:block;grid-column:1/-1">所有食品已放置，請檢查位置後送出。</div>'}</div>`;
+renderFridgePreview();
 }
 function switchFridgeTab(tab){activeFridgeTab=tab;['ft0','ft1','ft2'].forEach((id,i)=>{const b=document.getElementById(id);if(b)b.classList.toggle('active',i===tab)});const names=[['top','🧊 冷藏區','乳品、蔬菜、冷藏食品'],['freezer','❄️ 冷凍庫','需長期低溫保存食品'],['room','🗄️ 常溫櫃','乾燥與密封食品']];const [key,title,desc]=names[tab];document.getElementById('fridgeArea').innerHTML=`<div class="fridge-zone" ondrop="dropFood(event,'${key}')" ondragover="allowDrop(event)"><h3>${title}</h3><div class="small">${desc}</div><div id="${key}Box" class="zone-items"></div></div>`;renderFridgePreview()}
 function renderNutritionTask(box){
@@ -1525,148 +1444,93 @@ box.innerHTML=`<div class="nutrition-box"><div class="task-rule"><h3>🎯 AI 今
 setTimeout(()=>{document.querySelectorAll('.food-card').forEach(card=>card.addEventListener('click',()=>toggleNutrition(Number(card.dataset.index))))},0);
 }
 
-function toggleNutrition(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=2){alert('最多只能選擇 2 種食物。');return;}selected[current].push(i)}renderNutritionTask(document.getElementById('options'))}
+function toggleNutrition(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=2){showNotice('最多只能選擇 2 種食物。','warn');return;}selected[current].push(i)}clearNotice();renderNutritionTask(document.getElementById('options'))}
 
 let droneX=26, droneY=26;
 function resetDroneGame(){droneX=26;droneY=26;const d=document.getElementById('dronePlayer');if(d){d.style.left=droneX+'px';d.style.top=droneY+'px';}const msg=document.getElementById('droneMsg');if(msg)msg.innerHTML='';}
 function moveDrone(dir){const d=document.getElementById('dronePlayer');const msg=document.getElementById('droneMsg');if(!d)return;const step=18;let nx=droneX,ny=droneY;if(dir==='up')ny-=step;if(dir==='down')ny+=step;if(dir==='left')nx-=step;if(dir==='right')nx+=step;if(nx<0||nx>560||ny<0||ny>450)return;const walls=[{x:90,y:0,w:22,h:230},{x:90,y:310,w:22,h:190},{x:200,y:120,w:22,h:380},{x:320,y:0,w:22,h:170},{x:320,y:250,w:22,h:250},{x:440,y:90,w:22,h:300}];const hit=walls.some(w=>nx+28>w.x&&nx<w.x+w.w&&ny+28>w.y&&ny<w.y+w.h);if(hit){msg.innerHTML=`<div class='feedback show bad' style='margin-top:12px'>⚠️ 撞到禁飛區！無人機已返回起點。</div>`;resetDroneGame();return;}droneX=nx;droneY=ny;d.style.left=droneX+'px';d.style.top=droneY+'px';if(droneX>500&&droneY>390){msg.innerHTML=`<div class='feedback show good' style='margin-top:12px'>✅ 醫療包成功送達！城市危機解除。</div><button class='primary' onclick='nextQuestion()' style='width:100%;margin-top:10px;background:#16a34a'>➡️ 前往下一題</button>`;}else{msg.innerHTML='';}}
 
 function renderSwitchTask(box,q){if(!Array.isArray(selected[current]))selected[current]=[];const status=['必要','娛樂','商業','必要','必要','避難公告'];const success=checked[current]&&isCorrect(current);box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>🎛️ AI 限電控制盤</h3><div class="small">第一階段：請開啟 3 個最重要的城市設施</div></div><div style="background:#fee2e2;color:#dc2626;padding:8px 14px;border-radius:999px;font-weight:900">剩餘電力 ${3-selected[current].length}/3</div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px">${q.options.map((op,i)=>{const on=selected[current].includes(i);return `<div style="background:#fff;border:2px solid ${on?'#22c55e':'#dbeafe'};border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div style="font-size:16px;font-weight:900">${op}</div><div class="small" style="margin-top:6px">設施類型：${status[i]}</div></div><div onclick="toggleSwitch(${i})" style="min-width:62px;height:34px;border-radius:999px;background:${on?'#22c55e':'#cbd5e1'};position:relative;cursor:pointer;transition:.2s"><div style="position:absolute;top:4px;left:${on?'32px':'4px'};width:26px;height:26px;border-radius:50%;background:#fff;transition:.2s"></div></div></div>`}).join('')}</div><div class="analysis-dark"><h3>⚡ 城市即時狀態</h3><div class="grid2" style="margin-top:12px"><div class="mini">🔋 已啟動設施<br><span class="big-num">${selected[current].length}</span></div><div class="mini">🏙️ 城市狀態<br><span class="big-num" style="color:${isCorrect(current)?'#16a34a':'#dc2626'}">${isCorrect(current)?'穩定':'風險中'}</span></div></div><button class="primary" onclick="checkSwitchTask()" style="width:100%;margin-top:14px">🚨 確認限電配置</button>${success?`<div class="feedback show good" style="margin-top:14px">✅ 第一階段成功！城市核心系統已維持供電。</div><div class="card" style="margin-top:14px;border:2px solid #06b6d4;background:linear-gradient(180deg,#ecfeff,#f0fdfa)"><h3 style="color:#0f766e;font-size:24px">🎯 第二階段：無人機空投救援</h3><p style="line-height:1.9;font-size:16px">道路仍有中斷，AI 改派無人機運送醫療包。請操控無人機避開高樓與禁飛區，安全飛往醫院。</p><div style="margin-top:18px;background:#0f172a;border-radius:24px;padding:18px;position:relative;overflow:hidden"><div id="droneGame" style="position:relative;height:500px;background:linear-gradient(180deg,#38bdf8,#dbeafe);border-radius:28px;border:6px solid #38bdf8;overflow:hidden"><div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.45) 1px,transparent 1px);background-size:24px 24px;opacity:.45"></div><div id="dronePlayer" style="position:absolute;left:26px;top:26px;font-size:34px;transition:.08s linear;z-index:5;filter:drop-shadow(0 6px 10px rgba(0,0,0,.25))">🚁</div><div id="hospitalTarget" style="position:absolute;right:28px;bottom:24px;font-size:54px;z-index:3">🏥</div><div style="position:absolute;left:90px;top:0;width:22px;height:230px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:90px;top:310px;width:22px;height:190px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:200px;top:120px;width:22px;height:380px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:320px;top:0;width:22px;height:170px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:320px;top:250px;width:22px;height:250px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:440px;top:90px;width:22px;height:300px;background:#1e293b;border-radius:999px"></div><div style="position:absolute;left:150px;top:40px;font-size:40px">🌩️</div><div style="position:absolute;left:255px;top:190px;font-size:40px">🏢</div><div style="position:absolute;left:365px;top:415px;font-size:40px">⚡</div><div style="position:absolute;left:480px;top:40px;font-size:36px">🛰️</div></div><div style="display:flex;justify-content:center;align-items:center;gap:14px;margin-top:18px"><div style="display:grid;grid-template-columns:72px 72px 72px;gap:10px"><div></div><button onclick="moveDrone('up')" style="height:68px;border-radius:22px;background:#2563eb;color:#fff;font-size:22px;box-shadow:0 8px 18px rgba(37,99,235,.3)">⬆️</button><div></div><button onclick="moveDrone('left')" style="height:68px;border-radius:22px;background:#2563eb;color:#fff;font-size:22px;box-shadow:0 8px 18px rgba(37,99,235,.3)">⬅️</button><button onclick="moveDrone('down')" style="height:68px;border-radius:22px;background:#2563eb;color:#fff;font-size:22px;box-shadow:0 8px 18px rgba(37,99,235,.3)">⬇️</button><button onclick="moveDrone('right')" style="height:68px;border-radius:22px;background:#2563eb;color:#fff;font-size:22px;box-shadow:0 8px 18px rgba(37,99,235,.3)">➡️</button></div><button onclick="resetDroneGame()" class="secondary" style="height:68px;padding:0 24px;font-size:20px;border-radius:22px">↺ 重來</button></div><div id="droneMsg"></div></div></div>`:''}</div></div>`;document.getElementById('infoContent').innerHTML=`<div class="card"><h3>🧠 AI 調度提醒</h3><p>請避免城市核心系統停擺。</p><p>限電時，通常會優先保留醫療、交通與供水系統。</p></div>`}
-function toggleSwitch(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=3){alert('最多只能開啟 3 個設施');return;}selected[current].push(i)}selected[current].sort((a,b)=>a-b);renderSwitchTask(document.getElementById('options'),questions[current])}
-function checkSwitchTask(){if(selected[current].length!==3){alert('請剛好開啟 3 個設施');return;}if(retryQuestions.includes(current)&&!isCorrect(current)){retrySolved[current]=true;alert('❌ 核心設施選擇錯誤，請重新調整。');return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}
+function toggleSwitch(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=3){showNotice('最多只能開啟 3 個設施。','warn');return;}selected[current].push(i)}selected[current].sort((a,b)=>a-b);clearNotice();renderSwitchTask(document.getElementById('options'),questions[current])}
+function checkSwitchTask(){if(selected[current].length!==3){showNotice('請剛好開啟 3 個設施。','warn');return;}if(!isCorrect(current)){finishWrongAttempt('核心設施選擇錯誤，請重新調整。');return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}
 function renderPowerTask(box,q){if(!Array.isArray(selected[current]))selected[current]=[];const critical=[90,20,85,15,88,10];const usage=[18,12,16,10,14,9];const danger=selected[current].includes(0)&&selected[current].includes(2)&&selected[current].includes(4)?'🟢 城市運作穩定':'🔴 部分區域即將停擺';box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>⚡ AI 城市能源調度戰</h3><div class="small">限電倒數中，請立即維持城市核心系統</div></div><div style="background:#fee2e2;color:#dc2626;padding:8px 14px;border-radius:999px;font-weight:900">⏳ 倒數 30 分鐘</div></div><div style="margin-top:14px;background:#0f172a;color:#fff;padding:14px;border-radius:18px"><div style="display:flex;justify-content:space-between"><span>⚠️ 城市狀態</span><b>${danger}</b></div><div style="margin-top:10px" class="bar-bg"><div class="bar" style="width:${selected[current].reduce((a,b)=>a+usage[b],0)}%;background:${selected[current].reduce((a,b)=>a+usage[b],0)>45?'#ef4444':'#22c55e'}"></div></div><div class="small" style="color:#cbd5e1;margin-top:6px">電力負載越高，城市越容易全面停電</div></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px">${q.options.map((op,i)=>{const active=selected[current].includes(i);return `<div class="fact-card ${active?'selected':''}" onclick="togglePower(${i})" style="padding:18px;position:relative;overflow:hidden"><div style="position:absolute;top:10px;right:12px;font-size:22px">${active?'⚡':'⭕'}</div><div style="font-size:18px;font-weight:900;line-height:1.6;padding-right:24px">${op}</div><div class="grid2" style="margin-top:12px"><div class="mini">🏙️ 重要度<br><span class="big-num" style="font-size:22px">${critical[i]}</span></div><div class="mini">⚡ 耗電量<br><span class="big-num" style="font-size:22px">${usage[i]}</span></div></div>${critical[i]>=85?'<div style="margin-top:8px;color:#dc2626;font-weight:900">⚠️ 核心基礎設施</div>':''}</div>`}).join('')}</div><div class="analysis-dark"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>📡 即時城市回饋</h3><div class="small" style="color:#cbd5e1">AI 會根據你的選擇模擬停電影響</div></div><div style="font-size:42px">🏙️</div></div><div class="grid2" style="margin-top:12px"><div class="mini">🔋 已分配電力<br><span class="big-num">${selected[current].reduce((a,b)=>a+usage[b],0)}%</span></div><div class="mini">🚨 風險等級<br><span class="big-num" style="color:${selected[current].includes(0)&&selected[current].includes(2)&&selected[current].includes(4)?'#16a34a':'#dc2626'}">${selected[current].includes(0)&&selected[current].includes(2)&&selected[current].includes(4)?'可控制':'高風險'}</span></div></div><button class="primary" onclick="checkPowerTask()" style="width:100%;margin-top:14px;font-size:18px">🚨 啟動能源調度</button>${checked[current]&&isCorrect(current)?`<div class="feedback show good" style="margin-top:14px">✅ 調度成功！<br>城市核心系統已維持正常運作，成功避免大規模停電。</div><button class="primary" onclick="nextQuestion()" style="width:100%;margin-top:10px;background:#16a34a">➡️ 前往下一題</button>`:''}</div></div>`;document.getElementById('infoContent').innerHTML=`<div class="card"><h3>🧠 AI 判斷原則</h3><p>✔️ 優先維持醫療、交通與供水。</p><p>✔️ 娛樂與廣告設施可暫時限電。</p><p>✔️ 若核心設施停電，可能造成城市癱瘓。</p></div><div class="card"><h3>📌 指揮中心通知</h3><p>請在有限電力下，避免最嚴重的連鎖影響。</p></div>`}
-function togglePower(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=3){alert('最多只能選擇 3 個區域');return;}selected[current].push(i)}selected[current].sort((a,b)=>a-b);renderPowerTask(document.getElementById('options'),questions[current])}
+function togglePower(i){if(checked[current])return;if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);if(idx>=0){selected[current].splice(idx,1)}else{if(selected[current].length>=3){showNotice('最多只能選擇 3 個區域。','warn');return;}selected[current].push(i)}selected[current].sort((a,b)=>a-b);clearNotice();renderPowerTask(document.getElementById('options'),questions[current])}
 function renderBoardGame(box,q){if(!selected[current])selected[current]={pos:0,carbon:55,happy:50,budget:100,choices:[]};const s=selected[current];const tiles=[{emoji:'☀️',name:'太陽能屋頂',carbon:-15,happy:+10,cost:30},{emoji:'🚌',name:'免費電動公車',carbon:-20,happy:+20,cost:40},{emoji:'💡',name:'智慧LED路燈',carbon:-10,happy:+8,cost:20},{emoji:'🏭',name:'燃煤備用發電',carbon:+25,happy:+5,cost:25},{emoji:'📺',name:'全天廣告燈牆',carbon:+18,happy:+6,cost:35},{emoji:'🌳',name:'城市植樹',carbon:-12,happy:+12,cost:25}];box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>🎲 Smart Energy World</h3><div class="small">請選擇 3 個城市建設方案</div></div><div style="background:#eff6ff;color:#2563eb;padding:10px 14px;border-radius:14px;font-weight:900">已選 ${s.choices.length}/3</div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:18px">${tiles.map((t,i)=>`<div class="food-card ${s.choices.includes(i)?'selected':''}" onclick="pickBoardTile(${i})" style="min-height:180px;display:flex;flex-direction:column;justify-content:space-between"><div><div style="font-size:36px">${t.emoji}</div><div class="name" style="margin-top:8px">${t.name}</div></div><div class="facts"><div class="fact">💰 ${t.cost}</div><div class="fact">🌍 ${t.carbon>0?'+':''}${t.carbon}</div><div class="fact">😊 ${t.happy>0?'+':''}${t.happy}</div></div></div>`).join('')}</div><div class="analysis-dark"><div style="display:flex;justify-content:space-between"><div><h3>🏙️ 城市即時狀態</h3><div class="small" style="color:#cbd5e1">系統會依照你的建設方案更新</div></div><div style="font-size:42px">📊</div></div><div class="grid2" style="margin-top:12px"><div class="mini">💰 剩餘預算<br><span class="big-num" style="color:${s.budget<0?'#dc2626':'#16a34a'}">${s.budget}</span></div><div class="mini">🌍 碳排指數<br><span class="big-num" style="color:${s.carbon>60?'#dc2626':'#16a34a'}">${s.carbon}</span></div><div class="mini">😊 市民滿意<br><span class="big-num" style="color:${s.happy>=80?'#16a34a':'#2563eb'}">${s.happy}</span></div><div class="mini">⚡ 城市狀態<br><span class="big-num" style="font-size:18px;color:${s.carbon<55&&s.happy>=80?'#16a34a':'#dc2626'}">${s.carbon<55&&s.happy>=80?'穩定':'待改善'}</span></div></div><button class="primary" onclick="checkBoardGame()" style="width:100%;margin-top:14px;font-size:18px">🎯 完成城市規劃</button></div></div>`;document.getElementById('infoContent').innerHTML=`<div class="card"><h3>🗺️ 城市策略提示</h3><p>✔️ 再生能源通常能降低碳排。</p><p>✔️ 大眾運輸能同時提高便利與永續性。</p><p>✔️ 高耗能設施可能讓城市碳排暴增。</p></div><div class="card"><h3>📌 AI 建議</h3><p>請找出「低碳＋高滿意度＋不超支」的最佳組合。</p></div>`}
-function pickBoardTile(i){if(checked[current])return;const s=selected[current];if(s.choices.includes(i)){s.choices=s.choices.filter(v=>v!==i)}else{if(s.choices.length>=3){alert('最多只能選擇 3 個建設方案');return;}s.choices.push(i)}const tiles=[{carbon:-15,happy:+10,cost:30},{carbon:-20,happy:+20,cost:40},{carbon:-10,happy:+8,cost:20},{carbon:+25,happy:+5,cost:25},{carbon:+18,happy:+6,cost:35},{carbon:-12,happy:+12,cost:25}];let carbon=55,happy=50,budget=100;s.choices.forEach(idx=>{carbon+=tiles[idx].carbon;happy+=tiles[idx].happy;budget-=tiles[idx].cost});s.carbon=carbon;s.happy=happy;s.budget=budget;renderBoardGame(document.getElementById('options'),questions[current])}
+function pickBoardTile(i){if(checked[current])return;const s=selected[current];if(s.choices.includes(i)){s.choices=s.choices.filter(v=>v!==i)}else{if(s.choices.length>=3){showNotice('最多只能選擇 3 個建設方案。','warn');return;}s.choices.push(i)}clearNotice();const tiles=[{carbon:-15,happy:+10,cost:30},{carbon:-20,happy:+20,cost:40},{carbon:-10,happy:+8,cost:20},{carbon:+25,happy:+5,cost:25},{carbon:+18,happy:+6,cost:35},{carbon:-12,happy:+12,cost:25}];let carbon=55,happy=50,budget=100;s.choices.forEach(idx=>{carbon+=tiles[idx].carbon;happy+=tiles[idx].happy;budget-=tiles[idx].cost});s.carbon=carbon;s.happy=happy;s.budget=budget;renderBoardGame(document.getElementById('options'),questions[current])}
 function checkBoardGame(){const s=selected[current];checked[current]=true;selected[current]=(s.carbon<55&&s.happy>=80&&s.budget>=0)?1:0;renderFeedback();updateScore();}
-function renderSorting(box,q){
-  let order=selected[current]||[...q.options];
-  selected[current]=order;
-  const checkedNow=sortingAttempted[current]===true;
-  const allCorrect=JSON.stringify(order)===JSON.stringify(q.answer);
-  box.innerHTML=`<div class="card">
-    <h3>🧠 拖曳排序區</h3>
-    <div class="small">請排序：最有效 → 最不建議。可拖曳，也可用「上移／下移」。按下檢查後，系統會直接在下方顯示結果。</div>
-    <div id="sortContainer" class="sort-container" style="margin-top:14px"></div>
-    <button type="button" class="primary" id="sortCheckBtn" style="margin-top:14px;width:100%">檢查排序</button>
-    <div id="sortFeedback" class="feedback ${checkedNow?'show':''} ${allCorrect?'good':'bad'}" style="margin-top:12px">
-      ${checkedNow?(allCorrect?'✅ 排序正確！你已優先處理根本原因，再處理輔助改善，最後排除不建議做法。':'❌ 排序還不完全正確。請看紅色項目，調整後再按一次「檢查排序」。'):''}
-    </div>
-  </div>`;
-  const container=document.getElementById('sortContainer');
-  order.forEach((op,i)=>{
-    const div=document.createElement('div');
-    div.className='drag-sort';
-    if(checkedNow)div.classList.add(op===q.answer[i]?'correct':'wrong');
-    div.draggable=true;
-    div.dataset.index=i;
-    div.innerHTML=`
-      <div class="drag-handle">☰</div>
-      <div style="flex:1;line-height:1.5"><b>${i+1}.</b> ${op}</div>
-      <div style="display:flex;gap:6px">
-        <button type="button" class="secondary sort-up" style="padding:6px 8px;font-size:12px" ${i===0?'disabled':''}>上移</button>
-        <button type="button" class="secondary sort-down" style="padding:6px 8px;font-size:12px" ${i===order.length-1?'disabled':''}>下移</button>
-      </div>`;
-    div.querySelector('.sort-up').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();moveSortByButton(i,-1);});
-    div.querySelector('.sort-down').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();moveSortByButton(i,1);});
-    div.addEventListener('dragstart',e=>{div.classList.add('dragging');e.dataTransfer.setData('text/plain',String(i));});
-    div.addEventListener('dragend',()=>div.classList.remove('dragging'));
-    div.addEventListener('dragover',e=>e.preventDefault());
-    div.addEventListener('drop',e=>{e.preventDefault();const from=Number(e.dataTransfer.getData('text/plain'));const to=Number(div.dataset.index);moveDragSort(from,to);});
-    container.appendChild(div);
-  });
-  const btn=document.getElementById('sortCheckBtn');
-  if(btn)btn.addEventListener('click',checkSorting);
-}
-
-function moveDragSort(from,to){
-  const order=selected[current];
-  if(!Array.isArray(order)||from===to||from<0||to<0)return;
-  const [item]=order.splice(from,1);
-  order.splice(to,0,item);
-  checked[current]=false;
-  sortingAttempted[current]=false;
-  renderSorting(document.getElementById('options'),questions[current]);
-}
-
-function moveSortByButton(i,dir){
-  const order=selected[current];
-  const j=i+dir;
-  if(!Array.isArray(order)||j<0||j>=order.length)return;
-  [order[i],order[j]]=[order[j],order[i]];
-  checked[current]=false;
-  sortingAttempted[current]=false;
-  renderSorting(document.getElementById('options'),questions[current]);
-}
-
-function checkSorting(){
-  const q=questions[current];
-  const order=selected[current]||[];
-  const ok=JSON.stringify(order)===JSON.stringify(q.answer);
-  sortingAttempted[current]=true;
-  checked[current]=ok;
-  if(ok){
-    retrySolved[current]=false;
-  }else if(retryQuestions.includes(current)){
-    retrySolved[current]=true;
-  }
-  renderSorting(document.getElementById('options'),q);
-  renderFeedback();
-  updateScore();
-}
-
 function getChatStages(){
-  return [
-    {speaker:'AI 助理',msg:'市區突然停電，醫院、捷運、商場都有回報。你要先要求確認哪一件事？',options:['先處理商場抱怨','先確認醫院與捷運是否正常','先發文安撫即可','全部服務都關閉'],best:1,rebut:['我不同意先處理商場抱怨。商場照明影響消費體驗，但醫院與捷運牽涉生命安全與大量移動人潮，應先確認核心基礎設施。','', '只發文安撫不夠。你還沒有確認醫院與捷運是否安全，這會讓市府只是在處理情緒，卻沒有處理真正風險。','全面關閉太粗暴，可能讓交通、醫療與民生服務一起停擺。正確做法是先查清楚核心設施狀態，再分級處理。']},
-    {speaker:'捷運中心',msg:'捷運部分訊號不穩，但醫院備援電力只剩 20 分鐘。你要怎麼調度？',options:['優先把電力調給醫院','優先恢復廣告看板','等市民自行回報','暫時忽略醫院'],best:0,rebut:['','廣告看板不是緊急基礎設施。醫院備援只剩 20 分鐘，若延誤，病患照護會直接受影響。','不能等市民自行回報。現在已經有明確資料指出醫院備援不足，市府應主動調度，而不是被動等待。','忽略醫院是高風險決策。醫療系統比一般服務更需要穩定供電，應優先保護。']},
-    {speaker:'市民代表',msg:'網路上出現「全市醫院都停擺」的傳言，但資料只顯示一間醫院備援不足。你要怎麼回應？',options:['轉傳傳言提醒大家','公布已確認資訊並持續更新','刪除所有留言','完全不回應'],best:1,rebut:['不應轉傳未查證傳言。資料只顯示一間醫院備援不足，把它說成全市停擺會放大恐慌。','', '刪除留言不能取代澄清，還可能讓市民覺得政府隱瞞資訊。應公布已確認資料並持續更新。','完全不回應會讓謠言繼續擴散。此時要用已確認資訊穩定民眾，而不是沉默。']}
-  ];
+return [
+{speaker:'AI 助理',msg:'市區突然停電，醫院、捷運、商場都有回報。你要先要求確認哪一件事？',options:['先處理商場抱怨','先確認醫院與捷運是否正常','先發文安撫即可','全部服務都關閉'],best:1,rebut:['商場照明影響消費體驗，但醫院與捷運牽涉生命安全與大量移動人潮，應先確認核心基礎設施。','', '只發文安撫不夠；你還沒有確認醫院與捷運是否安全。','全面關閉太粗暴，可能讓交通、醫療與民生服務一起停擺。']},
+{speaker:'捷運中心',msg:'捷運部分訊號不穩，但醫院備援電力只剩 20 分鐘。你要怎麼調度？',options:['優先把電力調給醫院','優先恢復廣告看板','等市民自行回報','暫時忽略醫院'],best:0,rebut:['','廣告看板不是緊急基礎設施。醫院備援只剩 20 分鐘，應優先保護醫療。','已有醫院備援不足的資料，市府應主動調度。','忽略醫院是高風險決策，可能直接影響病患照護。']},
+{speaker:'市民代表',msg:'網路上出現「全市醫院都停擺」的傳言，但資料只顯示一間醫院備援不足。你要怎麼回應？',options:['轉傳傳言提醒大家','公布已確認資訊並持續更新','刪除所有留言','完全不回應'],best:1,rebut:['不應轉傳未查證傳言，這會放大恐慌。','', '刪除留言不能取代澄清，應公布已確認資料。','完全不回應會讓謠言繼續擴散。']}
+];
 }
-
 function renderChatTask(box,q){
-  if(!selected[current]||typeof selected[current]!=='object'||Array.isArray(selected[current])){
-    selected[current]={step:0,history:[],waiting:false,retrying:false};
-  }
-  const s=selected[current];
-  const stages=getChatStages();
-  const stage=stages[s.step];
-  let messages=s.history.map(h=>`<div style="display:flex;justify-content:flex-start"><div style="max-width:78%;background:#fff;color:#0f172a;padding:14px 16px;border-radius:18px;box-shadow:0 6px 16px rgba(15,23,42,.08)"><div style="font-size:12px;font-weight:900;opacity:.75;margin-bottom:6px">${h.speaker}</div><div style="line-height:1.9;font-size:15px">${h.msg}</div></div></div><div style="display:flex;justify-content:flex-end"><div style="max-width:78%;background:#2563eb;color:#fff;padding:14px 16px;border-radius:18px;line-height:1.8">${h.reply}</div></div>${h.rebut?`<div style="display:flex;justify-content:flex-start"><div style="max-width:78%;background:#fee2e2;color:#991b1b;padding:12px 14px;border-radius:18px;line-height:1.7;font-weight:800">${h.rebut}</div></div>`:''}`).join('');
-  if(stage&&!s.waiting&&!s.retrying){messages+=`<div style="display:flex;justify-content:flex-start"><div style="max-width:78%;background:#fff;color:#0f172a;padding:14px 16px;border-radius:18px;box-shadow:0 6px 16px rgba(15,23,42,.08)"><div style="font-size:12px;font-weight:900;opacity:.75;margin-bottom:6px">${stage.speaker}</div><div style="line-height:1.9;font-size:15px">${stage.msg}</div></div></div>`}
-  if(s.retrying&&stage){
-    messages+=`<div style="display:flex;justify-content:flex-start"><div style="max-width:78%;background:#fff7ed;color:#9a3412;padding:12px 14px;border-radius:18px;line-height:1.7;font-weight:900;border:1px solid #fed7aa">市民代表：我不同意這樣處理。你這樣可能讓市民以為政府在隱瞞資訊，反而降低信任。請提出一個既能澄清謠言、又能公開透明的回應方式。</div></div>`;
-    s.retrying=false;
-  }
-  if(s.waiting){messages+=`<div style="display:flex;justify-content:flex-start"><div style="background:#e2e8f0;color:#475569;padding:10px 14px;border-radius:18px;font-weight:900">對方正在輸入中…</div></div>`}
-  box.innerHTML=`<div class="card" style="padding:0;overflow:hidden"><div style="background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:18px"><div style="font-size:24px;font-weight:900">💬 Smart City Chat</div><div class="small" style="color:#e0e7ff">市長危機群組聊天室｜${Math.min(s.step+1,stages.length)}/${stages.length}</div></div><div style="padding:18px;background:#f8fafc"><div id="chatScroll" style="display:grid;gap:12px;max-height:460px;overflow-y:auto">${messages}</div>${stage&&!s.waiting?`<div style="margin-top:22px"><div style="font-size:15px;font-weight:900;margin-bottom:10px">💬 你要怎麼回覆？</div><div style="display:grid;gap:10px">${stage.options.map((op,i)=>`<button onclick="nextChatStage(${i})" class="secondary" style="text-align:left;padding:14px 16px;font-size:15px">${op}</button>`).join('')}</div></div>`:!stage?`<div class="feedback show good" style="margin-top:18px">✅ 城市危機已逐步解除。<br>即使過程中有不完美決策，最後仍透過修正與判斷完成危機處理。</div><button class="primary" onclick="finishChatTask()" style="width:100%;margin-top:12px">完成任務</button>`:''}</div></div>`;
-  setTimeout(()=>{const sc=document.getElementById('chatScroll');if(sc)sc.scrollTop=sc.scrollHeight;},0);
-  document.getElementById('infoContent').innerHTML=`<div class="card"><h3>📡 即時狀態</h3><div class="grid2"><div class="mini">目前階段<br><span class="big-num">${Math.min(s.step+1,stages.length)}</span></div><div class="mini">已回覆<br><span class="big-num">${s.history.filter(h=>h.reply).length}</span></div></div></div><div class="card"><h3>📌 任務提醒</h3><p>選錯不會中斷，對方會反駁或提醒你，情境仍會繼續推進。</p></div>`;
+if(checked[current]&&selected[current]==='chat-complete'){box.innerHTML=`<div class="card" style="padding:0;overflow:hidden"><div style="background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:14px 16px"><div style="font-size:21px;font-weight:900">💬 Smart City Chat</div><div class="small" style="color:#e0e7ff">市長危機群組聊天室｜3/3</div></div><div style="padding:14px;background:#f8fafc"><div class="feedback show good">✅ 城市危機已逐步解除。你完成了核心設施確認、供電調度與資訊澄清。</div></div></div>`;return}
+if(!selected[current]||typeof selected[current]!=='object'||Array.isArray(selected[current]))selected[current]={step:0,history:[],waiting:false,retrying:false};
+const s=selected[current],stages=getChatStages(),stage=stages[s.step];
+let messages=s.history.map(h=>`<div style="display:flex;justify-content:flex-start"><div style="max-width:82%;background:#fff;padding:10px 12px;border-radius:15px;box-shadow:0 4px 12px rgba(15,23,42,.08)"><div style="font-size:11px;font-weight:900;opacity:.72;margin-bottom:4px">${h.speaker}</div><div style="line-height:1.55;font-size:13px">${h.msg}</div></div></div><div style="display:flex;justify-content:flex-end"><div style="max-width:82%;background:#2563eb;color:#fff;padding:10px 12px;border-radius:15px;line-height:1.5;font-size:13px">${h.reply}</div></div>${h.rebut?`<div style="display:flex;justify-content:flex-start"><div style="max-width:82%;background:#fee2e2;color:#991b1b;padding:9px 11px;border-radius:15px;line-height:1.5;font-size:13px;font-weight:800">${h.rebut}</div></div>`:''}`).join('');
+if(stage&&!s.waiting)messages+=`<div style="display:flex;justify-content:flex-start"><div style="max-width:82%;background:#fff;padding:10px 12px;border-radius:15px;box-shadow:0 4px 12px rgba(15,23,42,.08)"><div style="font-size:11px;font-weight:900;opacity:.72;margin-bottom:4px">${stage.speaker}</div><div style="line-height:1.55;font-size:13px">${stage.msg}</div></div></div>`;
+if(s.retrying&&stage)messages+=`<div style="display:flex;justify-content:flex-start"><div style="max-width:82%;background:#fff7ed;color:#9a3412;padding:9px 11px;border-radius:15px;font-size:13px;font-weight:900;border:1px solid #fed7aa">請參考提醒後重新判斷，你可以持續修正回應。</div></div>`;
+if(s.waiting)messages+=`<div style="display:flex;justify-content:flex-start"><div style="background:#e2e8f0;color:#475569;padding:8px 11px;border-radius:15px;font-size:13px;font-weight:900">對方正在輸入中...</div></div>`;
+box.innerHTML=`<div class="card" style="padding:0;overflow:hidden"><div style="background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:13px 15px"><div style="font-size:21px;font-weight:900">💬 Smart City Chat</div><div class="small" style="color:#e0e7ff">市長危機群組聊天室｜${Math.min(s.step+1,stages.length)}/${stages.length}</div></div><div style="padding:12px;background:#f8fafc"><div id="chatScroll" style="display:grid;gap:8px;max-height:255px;overflow-y:auto">${messages}</div>${stage&&!s.waiting?`<div style="margin-top:12px"><div style="font-size:13px;font-weight:900;margin-bottom:7px">💬 你要怎麼回覆？</div><div style="display:grid;gap:6px">${stage.options.map((op,i)=>`<button onclick="nextChatStage(${i})" class="secondary" style="text-align:left;padding:8px 11px;font-size:13px">${op}</button>`).join('')}</div></div>`:!stage?`<div class="feedback show good" style="margin-top:12px">✅ 城市危機已逐步解除，請完成任務。</div><button class="primary" onclick="finishChatTask()" style="width:100%;margin-top:8px">完成任務</button>`:''}</div></div>`;
+setTimeout(()=>{const sc=document.getElementById('chatScroll');if(sc)sc.scrollTop=sc.scrollHeight},0);
+document.getElementById('infoContent').innerHTML=`<div class="card"><h3>📡 即時狀態</h3><div class="grid2"><div class="mini">目前階段<br><span class="big-num">${Math.min(s.step+1,stages.length)}</span></div><div class="mini">已回覆<br><span class="big-num">${s.history.length}</span></div></div></div><div class="card"><h3>📌 任務提醒</h3><p>先確認關鍵風險，再做資源調度，最後澄清未證實訊息。</p><p class="small">選錯時聊天室會提供引導，你可持續修正直到完成決策。</p></div>`;
 }
-
 function nextChatStage(choice){
-const s=selected[current];
-const stages=getChatStages();
-const stage=stages[s.step];
-const userReply=stage.options[choice];
-const isCorrectChoice=choice===stage.best;
-const rebut=isCorrectChoice?'':(stage.rebut[choice]||'這個做法可能不是目前最優先的處理方式。');
-
-s.history.push({speaker:stage.speaker,msg:stage.msg,reply:userReply,rebut:rebut});
-s.waiting=true;
-renderChatTask(document.getElementById('options'),questions[current]);
-
-setTimeout(()=>{
-if(isCorrectChoice){
-s.step++;
-s.retrying=false;
-}else{
-s.retrying=true;
+if(checked[current])return;const s=selected[current],stage=getChatStages()[s.step];if(!stage||s.waiting)return;const correct=choice===stage.best;
+s.history.push({speaker:stage.speaker,msg:stage.msg,reply:stage.options[choice],rebut:correct?'':stage.rebut[choice]});s.waiting=true;s.retrying=false;renderChatTask(document.getElementById('options'),questions[current]);
+setTimeout(()=>{s.waiting=false;if(correct){s.step++;renderChatTask(document.getElementById('options'),questions[current]);return}wrongAttempts[current]++;retrySolved[current]=true;updateAttemptDisplay();s.retrying=true;showNotice('這項回應有風險，請參考聊天室引導後再次修正；完成後本題可得 7 分。','warn');renderChatTask(document.getElementById('options'),questions[current])},700);
 }
-s.waiting=false;
-renderChatTask(document.getElementById('options'),questions[current]);
-},1000);
-}
+function finishChatTask(){selected[current]='chat-complete';checked[current]=true;specialScores[current]=wrongAttempts[current]===0?11:7;renderOptions();renderFeedback();updateScore();updateAttemptDisplay()}
+function renderSorting(box,q){
+let order=selected[current]||[...q.options];
+selected[current]=order;
 
-function finishChatTask(){checked[current]=true;selected[current]=1;renderFeedback();updateScore();}
+box.innerHTML=`<div class="card">
+  <h3>🧠 拖曳排序區</h3>
+  <div class="small">請拖曳排序：最有效 → 最不建議。若拖曳不順，也可以用「上移／下移」。</div>
+  <div id="sortContainer" class="sort-container" style="margin-top:14px"></div>
+  <button class="primary" onclick="checkSorting()" style="margin-top:14px;width:100%">檢查排序</button>
+</div>`;
+
+const container=document.getElementById('sortContainer');
+
+order.forEach((op,i)=>{
+  const div=document.createElement('div');
+  div.className='drag-sort';
+  if(checked[current])div.classList.add(op===q.answer[i]?'correct':'wrong');
+  div.draggable=!checked[current];
+  div.dataset.index=i;
+
+  div.innerHTML=`
+    <div class="drag-handle">☰</div>
+    <div style="flex:1;line-height:1.5"><b>${i+1}.</b> ${op}</div>
+    <div style="display:flex;gap:6px">
+      <button class="secondary" onclick="moveSortByButton(${i},-1);event.stopPropagation();" style="padding:6px 8px;font-size:12px" ${i===0||checked[current]?'disabled':''}>上移</button>
+      <button class="secondary" onclick="moveSortByButton(${i},1);event.stopPropagation();" style="padding:6px 8px;font-size:12px" ${i===order.length-1||checked[current]?'disabled':''}>下移</button>
+    </div>
+  `;
+
+  div.addEventListener('dragstart',e=>{
+    div.classList.add('dragging');
+    e.dataTransfer.setData('text/plain',i);
+  });
+
+  div.addEventListener('dragend',()=>div.classList.remove('dragging'));
+  div.addEventListener('dragover',e=>e.preventDefault());
+
+  div.addEventListener('drop',e=>{
+    e.preventDefault();
+    if(checked[current])return;
+    const from=Number(e.dataTransfer.getData('text/plain'));
+    const to=Number(div.dataset.index);
+    moveDragSort(from,to);
+  });
+
+  container.appendChild(div);
+});
+}
 
 function renderChoiceOptions(box,q){
 q.options.forEach((op,i)=>{
@@ -1695,14 +1559,81 @@ btn.addEventListener('click',checkMulti);
 box.appendChild(btn);
 }
 }
-function selectOption(i){if(checked[current])return;const q=questions[current];if(q.multi){if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);idx>=0?selected[current].splice(idx,1):selected[current].push(i);renderOptions()}else{selected[current]=i;if(retryQuestions.includes(current)&&i!==q.answer){setTimeout(()=>{alert('❌ 答案不正確，請再試一次。');selected[current]=null;retrySolved[current]=true;renderOptions();renderFeedback();updateScore();},250);return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}}
-function renderFeedback(){const fb=document.getElementById('feedback');const q=questions[current];if(checked[current]){const ok=isCorrect(current);fb.className='feedback show '+(ok?'good':'bad');fb.textContent=(ok?'答對了！':'再想想。')+' '+q.feedback}else{fb.className='feedback';fb.textContent=''}}
-function isCorrect(i){const q=questions[i],s=selected[i];if(q.operation)return s===q.answer;if(q.fridgeTask)return checked[i]===true;if(q.lifeTask)return checked[i]===true;if(q.crisisTask)return !!(s&&s.stage1===q.answer&&s.stage2Choice===q.stage2Answer&&s.stage3Choice===q.stage3Answer);if(q.switchTask)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));if(q.powerTask)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));if(q.sorting)return Array.isArray(s)&&s.every((v,idx)=>v===q.answer[idx]);if(q.multi)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));return s===q.answer}
-function checkMulti(){if(retryQuestions.includes(current)&&!isCorrect(current)){retrySolved[current]=true;alert('❌ 還有選項不正確，請重新調整。');return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}
-function checkPowerTask(){if(!Array.isArray(selected[current])||selected[current].length!==3){alert('請選擇 3 個優先供電區域');return;}checked[current]=true;renderOptions();renderFeedback();updateScore();}
-function dragFact(ev,item){ev.dataTransfer.setData('fact',item)}function dropFact(ev,zone){ev.preventDefault();const item=ev.dataTransfer.getData('fact');if(!selected[current])selected[current]={trusted:[],questionable:[]};selected[current].trusted=selected[current].trusted.filter(v=>v!==item);selected[current].questionable=selected[current].questionable.filter(v=>v!==item);selected[current][zone].push(item);renderOptions()}function renderFactPreview(){const s=selected[current]||{trusted:[],questionable:[]};const t=document.getElementById('trustedBox');const q=document.getElementById('questionableBox');if(t)t.innerHTML=s.trusted.map(v=>`<div class="placed-food" onclick="removeFact('${v}')">${v}</div>`).join('');if(q)q.innerHTML=s.questionable.map(v=>`<div class="placed-food" onclick="removeFact('${v}')">${v}</div>`).join('')}function removeFact(v){selected[current].trusted=selected[current].trusted.filter(x=>x!==v);selected[current].questionable=selected[current].questionable.filter(x=>x!==v);renderOptions()}function checkFactTask(){const s=selected[current]||{trusted:[],questionable:[]};const ok=JSON.stringify([...s.trusted].sort())===JSON.stringify([...questions[current].answer.trusted].sort())&&JSON.stringify([...s.questionable].sort())===JSON.stringify([...questions[current].answer.questionable].sort());checked[current]=ok;if(!ok)alert('還有資訊分類錯誤，請再檢查來源與數據。');renderFeedback();updateScore()}function allowDrop(ev){ev.preventDefault()}function dragFood(ev,item){ev.dataTransfer.setData('text',item)}function dropFood(ev,place){ev.preventDefault();const item=ev.dataTransfer.getData('text');if(!selected[current])selected[current]={};selected[current][item]=place;renderOptions();renderFridgePreview()}function foodEmoji(name){const map={牛奶:'🥛',生菜:'🥬',優格:'🥣',起司:'🧀',水餃:'🥟',冰淇淋:'🍦',鮭魚排:'🐟',雞塊:'🍗',餅乾:'🍪',麵包:'🍞',罐頭:'🥫',泡麵:'🍜'};return map[name]||'🍽️'}function renderFridgePreview(){const s=selected[current]||{};['top','freezer','room'].forEach(k=>{const el=document.getElementById(k+'Box');if(el){el.innerHTML='';Object.keys(s).forEach(item=>{if(s[item]===k){el.innerHTML+=`<div class="placed-food" onclick="removeFood('${item}')" style="cursor:pointer">${foodEmoji(item)} ${item}</div>`}})}})}function removeFood(item){if(selected[current]&&selected[current][item]){delete selected[current][item];renderOptions();renderFridgePreview()}}function checkFridgeTask(){const ans=selected[current]||{};const expected={牛奶:'top',生菜:'top',優格:'top',起司:'top',水餃:'freezer',冰淇淋:'freezer',鮭魚排:'freezer',雞塊:'freezer',餅乾:'room',麵包:'room',罐頭:'room',泡麵:'room'};let msgs=[];Object.keys(expected).forEach(item=>{if(!ans[item])msgs.push('⚠️ '+foodEmoji(item)+' '+item+' 還沒有放入收納區。');else if(ans[item]!==expected[item])msgs.push('⚠️ '+foodEmoji(item)+' '+item+' 的位置需要再確認。')});const ok=msgs.length===0;document.getElementById('fridgeFeedback').innerHTML=`<div class="feedback show ${ok?'good':'bad'}">${ok?'✅ 冰箱配置成功！食品保存安全。':msgs.slice(0,4).join('<br>')+(msgs.length>4?'<br>……還有其他食品需要調整。':'')}</div>`;checked[current]=ok;if(ok){renderFeedback();updateScore()}}
-function cartLines(){let lines=[];Object.keys(cart).forEach(k=>{if(cart[k]>0)lines.push(`<p>${productNames[k]}：${cart[k]}</p>`)});return lines.length?lines.join(''):'<p class="small">購物車目前是空的，請從左側加入商品。</p>'}function addCart(t){if(checked[current])return;cart[t]++;renderOptions()}function clearCart(){if(checked[current])return;cart={meal:0,milk:0,fries:0,tea:0,choco:0,sandwich:0};payment=0;couponApplied=false;renderOptions()}function applyCoupon(){if(checked[current])return;couponApplied=true;renderOptions()}function addMoney(v){if(checked[current])return;payment+=v;const total=document.getElementById('payTotal');if(total)total.textContent=payment}function submitPayment(){const correctCart=cart.meal===2&&cart.milk===1&&cart.fries===0&&cart.tea===0&&cart.choco===0&&cart.sandwich===0;selected[current]=(payment===270&&correctCart&&couponApplied)?270:payment;checked[current]=true;renderFeedback();updateScore();alert(payment===270&&correctCart&&couponApplied?'✅ 付款成功！':'❌ 付款失敗，請重新確認商品、優惠券與付款金額')}
-function renderProgress(){const names=['閱讀','付款','收納','配餐','健康','恢復','警報','城市','人生'];const track=document.getElementById('progressTrack');if(!track)return;track.innerHTML=names.map((n,i)=>`<div class="progress-step ${i===current?'active':''} ${i<current?'done':''}" onclick="jumpQuestion(${i})" title="第${i+1}題"><div class="progress-circle">${i+1}</div><div class="progress-label">${n}</div></div>`).join('')}function jumpQuestion(i){current=i;render()}function calcScore(){let total=0;questions.forEach((_,i)=>{if(checked[i]&&isCorrect(i)){total+=retrySolved[i]?5:scoreMap[i]}});return total}function updateScore(){document.getElementById('score').textContent=calcScore()}function prevQuestion(){if(current>0){current--;render()}}
+function selectOption(i){if(checked[current])return;const q=questions[current];if(q.multi){if(!Array.isArray(selected[current]))selected[current]=[];const idx=selected[current].indexOf(i);idx>=0?selected[current].splice(idx,1):selected[current].push(i);renderOptions()}else{selected[current]=i;if(i!==q.answer){selected[current]=null;finishWrongAttempt('答案不正確，請重新判讀資訊。');return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}}
+function renderFeedback(){const fb=document.getElementById('feedback');const q=questions[current];if(checked[current]){if(q.lifeTask){const points=questionScore(current);fb.className='feedback show '+(points>=8?'good':'bad');fb.textContent=`AI 診斷完成。本題得分 ${points} / ${scoreMap[current]} 分。 ${q.feedback}`;return}const ok=isCorrect(current);fb.className='feedback show '+(ok?'good':'bad');fb.textContent=(ok?'答對了！':'再想想。')+' '+q.feedback}else{fb.className='feedback';fb.textContent=''}}
+function isCorrect(i){const q=questions[i],s=selected[i];if(q.operation)return s===q.answer;if(q.fridgeTask)return !!s&&Object.entries(q.answer).every(([zone,items])=>items.every(item=>s[item]===zone));if(q.lifeTask)return s===q.answer;if(q.chatTask)return s==='chat-complete';if(q.crisisTask)return !!(s&&s.stage1===q.answer&&Array.isArray(s.stage2Choices)&&s.stage2Choices.length===q.stage2Answers.length&&q.stage2Answers.every(v=>s.stage2Choices.includes(v))&&s.stage3Choice===q.stage3Answer);if(q.switchTask)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));if(q.powerTask)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));if(q.sorting)return Array.isArray(s)&&s.every((v,idx)=>v===q.answer[idx]);if(q.multi)return Array.isArray(s)&&s.length===q.answer.length&&q.answer.every(v=>s.includes(v));return s===q.answer}
+function checkMulti(){if(!isCorrect(current)){finishWrongAttempt('選項組合不正確，請重新調整。');return;}checked[current]=true;renderOptions();renderFeedback();updateScore()}
+function checkPowerTask(){if(!Array.isArray(selected[current])||selected[current].length!==3){showNotice('請選擇 3 個優先供電區域。','warn');return;}checked[current]=true;renderOptions();renderFeedback();updateScore();}
+function moveDragSort(from,to){if(checked[current])return;let arr=[...(selected[current]||questions[current].options)];const item=arr.splice(from,1)[0];arr.splice(to,0,item);selected[current]=arr;renderOptions()}
+
+function moveSortByButton(index,delta){
+  if(checked[current])return;
+  const q=questions[current];
+  let arr=[...(selected[current]||q.options)];
+  const to=index+delta;
+  if(to<0 || to>=arr.length)return;
+  const item=arr.splice(index,1)[0];
+  arr.splice(to,0,item);
+  selected[current]=arr;
+  renderOptions();
+}
+
+function checkSorting(){
+  const q=questions[current];
+  if(!q || !q.sorting)return;
+
+  if(!Array.isArray(selected[current])){
+    selected[current]=[...q.options];
+  }
+
+  const correct=isCorrect(current);
+
+  if(correct){
+    checked[current]=true;
+    renderOptions();
+    renderFeedback();
+    updateScore();
+    updateAttemptDisplay();
+    showNotice('排序正確，你已完成第 6 題。','info');
+    return;
+  }
+
+  const wrongList=selected[current]
+    .map((v,i)=> v===q.answer[i] ? '' : `第${i+1}位`)
+    .filter(Boolean)
+    .join('、');
+
+  finishWrongAttempt('排序還不正確，需要檢查的位置：' + (wrongList || '整體順序'));
+}
+function dragFact(ev,item){ev.dataTransfer.setData('fact',item)}
+function dropFact(ev,zone){ev.preventDefault();const item=ev.dataTransfer.getData('fact');if(!selected[current])selected[current]={trusted:[],questionable:[]};selected[current].trusted=selected[current].trusted.filter(v=>v!==item);selected[current].questionable=selected[current].questionable.filter(v=>v!==item);selected[current][zone].push(item);renderOptions()}
+function renderFactPreview(){const s=selected[current]||{trusted:[],questionable:[]};const t=document.getElementById('trustedBox');const q=document.getElementById('questionableBox');if(t)t.innerHTML=s.trusted.map(v=>`<div class="placed-food" onclick="removeFact('${v}')">${v}</div>`).join('');if(q)q.innerHTML=s.questionable.map(v=>`<div class="placed-food" onclick="removeFact('${v}')">${v}</div>`).join('')}
+function removeFact(v){selected[current].trusted=selected[current].trusted.filter(x=>x!==v);selected[current].questionable=selected[current].questionable.filter(x=>x!==v);renderOptions()}
+function checkFactTask(){const s=selected[current]||{trusted:[],questionable:[]};const ok=JSON.stringify([...s.trusted].sort())===JSON.stringify([...questions[current].answer.trusted].sort())&&JSON.stringify([...s.questionable].sort())===JSON.stringify([...questions[current].answer.questionable].sort());if(!ok){finishWrongAttempt('還有資訊分類錯誤，請再檢查來源與數據。');return;}checked[current]=true;renderFeedback();updateScore()}
+function allowDrop(ev){ev.preventDefault()}
+function dragFood(ev,item){fridgePending=null;ev.dataTransfer.setData('text',item)}
+function selectFridgeFood(item){if(checked[current])return;fridgePending=fridgePending===item?null:item;renderOptions()}
+function placeSelectedFood(place){if(fridgePending)placeFood(fridgePending,place)}
+function placeFood(item,place){if(checked[current])return;if(!selected[current])selected[current]={};selected[current][item]=place;fridgePending=null;clearNotice();renderOptions()}
+function dropFood(ev,place){ev.preventDefault();placeFood(ev.dataTransfer.getData('text'),place)}
+function foodEmoji(name){const map={牛奶:'🥛',生菜:'🥬',優格:'🥣',起司:'🧀',水餃:'🥟',冰淇淋:'🍦',鮭魚排:'🐟',雞塊:'🍗',餅乾:'🍪',麵包:'🍞',罐頭:'🥫',泡麵:'🍜'};return map[name]||'🍽️'}
+function renderFridgePreview(){const s=selected[current]||{},total=questions[current].options.length,placed=Object.keys(s).length;['top','freezer','room'].forEach(k=>{const el=document.getElementById(k+'Box');if(el){el.innerHTML=Object.keys(s).filter(item=>s[item]===k).map(item=>`<div class="placed-food storage-chip" draggable="${!checked[current]}" ondragstart="dragFood(event,'${item}')" onclick="removeFood('${item}')" title="拖曳可移動，點擊可取回">${foodEmoji(item)} ${item}</div>`).join('')}});const count=document.getElementById('fridgePlacedCount'),remaining=document.getElementById('fridgeRemaining'),submit=document.getElementById('fridgeSubmitBtn');if(count)count.textContent=placed;if(remaining)remaining.textContent=placed===total?'全部完成':`尚有 ${total-placed} 項`;if(submit)submit.disabled=checked[current]||placed<total}
+function removeFood(item){if(!checked[current]&&selected[current]&&selected[current][item]){delete selected[current][item];fridgePending=null;renderOptions()}}
+function checkFridgeTask(){if(checked[current])return;const ans=selected[current]||{},total=questions[current].options.length;if(Object.keys(ans).length<total){showNotice('請先將所有食品放入適合的收納位置。','warn');return}const expected={牛奶:'top',生菜:'top',優格:'top',起司:'top',水餃:'freezer',冰淇淋:'freezer',鮭魚排:'freezer',雞塊:'freezer',餅乾:'room',麵包:'room',罐頭:'room',泡麵:'room'};let msgs=[];Object.keys(expected).forEach(item=>{if(ans[item]!==expected[item])msgs.push('⚠️ '+foodEmoji(item)+' '+item+' 的位置需要再確認。')});const ok=msgs.length===0;if(!ok){finishWrongAttempt('收納位置仍有錯誤，請再檢查食品保存需求。');return;}checked[current]=true;fridgePending=null;renderOptions();renderFeedback();updateScore();showNotice('收納完成！冷藏、冷凍與食品櫃分類正確。','info')}
+function cartLines(){const lines=Object.keys(cart).filter(k=>cart[k]>0).map(k=>`<div class="receipt-row"><span>${productNames[k]}</span><span>$${productPrices[k]} × ${cart[k]}</span><b>$${productPrices[k]*cart[k]}</b></div>`);return lines.length?lines.join(''):'<div class="receipt-empty">尚未加入商品，請從左側選購。</div>'}
+function changeCart(t,delta){if(checked[current])return;cart[t]=Math.max(0,cart[t]+delta);renderOptions()}
+function addCart(t){changeCart(t,1)}
+function clearPayment(){if(checked[current])return;payment=0;renderOptions()}
+function clearCart(){if(checked[current])return;cart={meal:0,milk:0,fries:0,tea:0,choco:0,sandwich:0};payment=0;couponApplied=false;selected[current]=null;renderOptions();renderFeedback()}
+function applyCoupon(){if(checked[current])return;couponApplied=true;renderOptions()}
+function addMoney(v){if(checked[current])return;payment+=v;const total=document.getElementById('payTotal');if(total)total.textContent='$'+payment}
+function submitPayment(){if(checked[current])return;const correctCart=cart.meal===2&&cart.milk===1&&cart.fries===0&&cart.tea===0&&cart.choco===0&&cart.sandwich===0;const ok=payment===270&&correctCart&&couponApplied;selected[current]=ok?270:payment;if(ok){checked[current]=true;renderOptions();renderFeedback();updateScore();showNotice('付款成功！你正確運用了優惠券與現金。','info')}else{finishWrongAttempt('付款失敗，請重新確認商品、優惠券與投入現金。')}}
+function renderProgress(){const names=['閱讀','付款','收納','配餐','健康','恢復','警報','城市','人生'];const track=document.getElementById('progressTrack');if(!track)return;track.innerHTML=names.map((n,i)=>{const locked=quizMode==='assessment'&&i>furthestUnlocked;return `<div class="progress-step ${i===current?'active':''} ${checked[i]?'done':''} ${locked?'locked':''}" onclick="jumpQuestion(${i})" title="第${i+1}題"><div class="progress-circle">${i+1}</div><div class="progress-label">${n}</div></div>`}).join('')}
+function jumpQuestion(i){if(quizMode==='assessment'&&i>furthestUnlocked){showNotice('正式測驗模式請依序完成題目。','warn');return}current=i;render()}
+function questionScore(i){if(specialScores[i]!==null)return specialScores[i];if(checked[i]&&isCorrect(i))return retrySolved[i]?5:scoreMap[i];return 0}
+function calcScore(){return questions.reduce((total,_,i)=>total+questionScore(i),0)}
+function updateScore(){document.getElementById('score').textContent=calcScore();updateAttemptDisplay()}
+function prevQuestion(){if(current>0){current--;render()}}
 
 
 
@@ -1728,8 +1659,8 @@ function updateFinalNextButton(){
   const btn=document.getElementById('nextBtn');
   if(!btn)return;
 
-  if(current===questions.length-1 && questions[current].lifeTask && !lifeDiagnosed){
-    btn.textContent='請先完成AI診斷';
+  if(current===questions.length-1 && questions[current].lifeTask && (!lifeDiagnosed || !checked[current])){
+    btn.textContent=lifeDiagnosed?'請重新安排並診斷':'請先完成AI診斷';
     btn.disabled=true;
     btn.style.opacity='.55';
     btn.style.cursor='not-allowed';
@@ -1744,34 +1675,45 @@ function updateFinalNextButton(){
 
 function nextQuestion(){
   if(current < questions.length-1){
-    current++;
-    render();
+    if(quizMode==='assessment'&&!checked[current]){
+      showNotice('請先完成本題。一般題最多作答兩次；第 8 題可依引導持續修正。','warn');
+      return;
+    }
+    advanceQuestion();
     return;
   }
 
   // 最後一題：必須完成 AI 診斷
   if(questions[current].lifeTask && !lifeDiagnosed){
-    alert('請先完成 AI 診斷，閱讀分析建議後才能完成測驗。');
+    showNotice('請先完成 AI 診斷，閱讀分析建議後才能完成測驗。','warn');
     return;
-  }
-
-  // 最後一題已完成診斷，標記完成
-  if(questions[current].lifeTask){
-    selected[current]='balanced';
-    checked[current]=true;
   }
 
   const unanswered=getUnansweredQuestions();
 
   if(unanswered.length>0){
-    alert('你還有題目尚未完成：第 ' + unanswered.join('、') + ' 題');
+    showNotice('你還有題目尚未完成：第 ' + unanswered.join('、') + ' 題。','warn');
     return;
   }
 
   showResult();
 }
 
-function showResult(){const total=calcScore();const correctCount=questions.reduce((acc,_,i)=>acc+((checked[i]&&isCorrect(i))?1:0),0);document.querySelector('.main').classList.remove('life-mode');document.querySelector('.question-panel').classList.remove('life-mode');document.querySelector('.question-panel').innerHTML=`<div style="text-align:center;padding:30px"><div class="badge">測驗完成</div><h1>你的得分：${total} / 100</h1><p class="stem">你完成了 ${correctCount} / ${questions.length} 題。<br>本測驗整合閱讀、數學、科學、AI、健康與城市決策素養。<br>第1～8題各11分，第9題12分；部分可重試題若曾答錯後再答對，該題以 5 分計算。</p><button class="primary" onclick="location.reload()">重新作答</button></div>`}
+function resultStatus(i){if(!checked[i])return '未完成';if(i===7)return questionScore(i)===11?'完整決策':questionScore(i)>0?'部分達成':'需改善';if(i===8)return '完成自我規劃';if(isCorrect(i))return retrySolved[i]?'重試答對':'首次答對';return '兩次未答對'}
+function showResult(){
+const total=calcScore();
+const dims=[
+{name:'閱讀與數學',items:[0,1]},
+{name:'科學與健康',items:[2,3,4,5]},
+{name:'AI媒體決策',items:[6,7]},
+{name:'生活規劃',items:[8]}
+];
+const dimCards=dims.map(d=>{const got=d.items.reduce((a,i)=>a+questionScore(i),0),max=d.items.reduce((a,i)=>a+scoreMap[i],0);return `<div class="result-dimension"><span>${d.name}</span><b>${got} / ${max}</b></div>`}).join('');
+const rows=questions.map((q,i)=>`<div class="result-row"><b>第${i+1}題</b><span>${q.title.replace(/^第\\d+題：/,'')}</span><span>${resultStatus(i)}</span><span class="result-score">${questionScore(i)} 分</span></div>`).join('');
+document.querySelector('.main').classList.add('single-mode');
+document.querySelector('.question-panel').innerHTML=`<div class="result-panel"><div class="result-head"><div class="badge">測驗完成</div><h1>你的得分：${total} / 100</h1><p class="stem">模式：${quizMode==='assessment'?'正式測驗':'展示預覽'}｜結果包含能力向度與逐題紀錄。</p></div><div class="result-grid">${dimCards}</div><div class="card"><h3>逐題作答紀錄</h3><div class="result-table">${rows}</div></div><button class="primary" onclick="location.reload()" style="width:100%">重新開始測驗</button></div>`;
+const info=document.querySelector('.info-panel');if(info)info.style.display='none';
+}
 function updateSim(){const ac=document.getElementById('ac'),light=document.getElementById('light'),bus=document.getElementById('bus');if(!ac)return;document.getElementById('acVal').textContent=ac.value;document.getElementById('lightVal').textContent=light.value;document.getElementById('busVal').textContent=bus.value;const carbon=document.getElementById('carbon'),con=document.getElementById('convenience');if(carbon){carbon.textContent=(ac.value>=24&&light.value<=70&&bus.value>=60)?'低':'偏高';con.textContent=(bus.value>=60&&light.value>=50)?'中高':'偏低'}}
 function toggleChat(){document.getElementById('chatbox').classList.toggle('open')}function resetChat(){document.getElementById('chatBody').innerHTML='<div class="msg bot">你好，我是 SmartBot。這題我可以提供提示，但不會直接替你作答喔！</div>'}function askBot(type){const q=questions[current];const labels={hint:'給我提示',data:'提醒我看哪裡',warning:'AI可能有偏誤嗎？',summary:'幫我整理資訊'};const body=document.getElementById('chatBody');body.innerHTML+=`<div class="msg user">${labels[type]}</div><div class="msg bot">${q.bot[type]}</div>`;body.scrollTop=body.scrollHeight}
 function runTests(){console.assert(questions.length===9,'There should be 9 questions');console.assert(questions[3].nutritionTask===true,'Question 4 should be nutrition task');console.assert(Array.isArray(questions[3].answer)&&questions[3].answer.length===2,'Question 4 should have two-item unique solution');}
@@ -1803,39 +1745,54 @@ const lifeActivities = [
   {name:'🛒 逛街', type:'shopping', cat:'risk', effect:'<span class="pos">+幸福</span> <span class="pos">+放鬆</span> <span class="neg">-管理</span> <span class="neg">+疲勞</span>'},
   {name:'📺 追劇', type:'drama', cat:'risk', effect:'<span class="pos">+放鬆</span> <span class="pos">+幸福</span> <span class="neg">-專注</span> <span class="neg">-管理</span>'},
 ];
-let lifeState = {goal:'平衡',placedCount:0,stats:{health:50,happy:50,focus:50,time:50,ai:20,tired:30},counts:{study:0,health:0,happy:0,risk:0}};
+let lifeState = {goal:'平衡',placedCount:0,placements:[],stats:{health:50,happy:50,focus:50,time:50,ai:20,tired:30},counts:{study:0,health:0,happy:0,risk:0}};
 let lifeDiagnosed=false;
+let lifePending=null;
+let lifeAdvanceAfterReport=false;
+let lifePlacementSeq=0;
 function renderLifeTask(box,q){
   document.querySelector('.main').classList.add('single-mode');
   box.innerHTML = `
     <div class="life-goals">
       <button class="life-goal active" data-goal="平衡">🌟 平衡</button><button class="life-goal" data-goal="學習成長">📚 學習成長</button><button class="life-goal" data-goal="身心健康">💪 身心健康</button><button class="life-goal" data-goal="快樂生活">😊 快樂生活</button>
     </div>
-    <div class="life-board"><div class="life-left"><div class="life-head"><div><h3>🎴 活動卡池</h3><div class="life-note">每個活動都有好處與代價，請自由拖曳安排。</div></div></div><div class="life-cards" id="lifeCardPool"></div></div>
-    <div class="life-right"><div class="life-head"><div><h3>🕒 24小時重點時段</h3><div class="life-note">一橫排一個時間，拖曳活動到時段中。</div></div><button class="life-clear" onclick="lifeResetPlan()">🗑 清空全部</button></div>
+    <div class="life-board"><div class="life-left"><div class="life-head"><div><h3>🎴 活動卡池</h3><div class="life-note">拖曳活動，或點選活動後再點時間格放入。</div></div></div><div class="life-cards" id="lifeCardPool"></div></div>
+    <div class="life-right"><div class="life-head"><div><h3>🕒 24小時重點時段</h3><div class="life-note">可依生活情形重複安排同一活動；安排後按 AI 診斷完成作答。</div></div><button class="life-clear" onclick="lifeResetPlan()">🗑 清空全部</button></div>
       <div class="life-timeline" id="lifeTimeline">
-        <div class="life-slot"><div class="life-slot-title">06:00｜清晨 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">09:00｜上午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">12:00｜中午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">15:00｜下午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">18:00｜傍晚 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">21:00｜晚上 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
-        <div class="life-slot"><div class="life-slot-title">00:00｜深夜 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="0" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">06:00｜清晨 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="1" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">09:00｜上午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="2" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">12:00｜中午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="3" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">15:00｜下午 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="4" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">18:00｜傍晚 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="5" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">21:00｜晚上 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
+        <div class="life-slot" data-slot="6" tabindex="0" role="button" onclick="lifePlaceSelected(this)" onkeydown="lifeSlotKey(event,this)"><div class="life-slot-title">00:00｜深夜 <span class="life-count">0項</span></div><div class="life-empty">＋ 放入活動</div></div>
       </div><div class="life-footer"><div class="life-summary" id="lifeSummary"></div><button class="life-ai-btn" id="lifeAiBtn" onclick="lifeAnalyze()">🧠 尚未完成安排</button></div></div></div>
     <div class="life-modal" id="lifeModal"><div class="life-report"><div class="life-report-main"><div class="life-type-badge life-good" id="lifeTypeBadge">🌟 平衡智慧生活者</div><h2>AI人生診斷報告</h2><div class="life-report-text" id="lifeReportText"></div><div class="life-close-row"><button class="life-close-btn life-secondary" onclick="lifeResetPlan();lifeCloseReport();">🔄 重新安排</button><button class="life-close-btn life-primary" onclick="lifeCloseReport()">✅ 我看完建議了</button></div></div><div class="life-report-side"><h3 style="margin-top:0">📊 診斷指標</h3><div id="lifeMeters"></div></div></div></div>
-    <div class="life-modal" id="lifeFinishModal"><div class="life-report life-finish-report"><div class="life-finish-main"><div class="life-type-badge life-good">🎉 作答完成</div><h2>你已完成 Smart Life 智慧人生挑戰</h2><div class="life-report-text" style="margin-top:18px">這題沒有唯一正確答案。你剛剛的安排反映了如何分配時間、如何平衡學習與休息、是否過度依賴 AI，以及是否具備健康與自我管理能力。<br><br>在真實生活中，「平衡」往往比「完美」更重要。</div><div class="life-close-row" style="justify-content:center"><button class="life-close-btn life-primary" onclick="lifeCloseFinish();selected[current]='balanced';checked[current]=true;renderFeedback();updateScore();">返回系統</button></div></div></div></div>`;
-  lifeRenderCards(); lifeBindSlots(); lifeUpdateSummary();
+    <div class="life-modal" id="lifeFinishModal"><div class="life-report life-finish-report"><div class="life-finish-main"><div class="life-type-badge life-good">🎉 作答完成</div><h2>你已完成 Smart Life 智慧人生挑戰</h2><div class="life-report-text" style="margin-top:18px">這題尊重每個人不同的生活型態。你已完成自己的安排並閱讀診斷建議，因此獲得本題滿分。<br><br>診斷內容可作為生活反思參考，而不是標準答案。</div><div class="life-close-row" style="justify-content:center"><button class="life-close-btn life-primary" onclick="lifeCloseFinish();renderFeedback();updateScore();">返回系統</button></div></div></div></div>`;
+  lifeRenderCards(); lifeBindSlots(); lifeRenderPlaced(); lifeUpdateSummary();
+  document.querySelectorAll('.life-goal').forEach(btn=>btn.classList.toggle('active',btn.dataset.goal===lifeState.goal));
 }
-function lifeRenderCards(){const pool=document.getElementById('lifeCardPool'); if(!pool)return; pool.innerHTML=lifeActivities.map(a=>`<div class="life-card" draggable="true" data-type="${a.type}" data-cat="${a.cat}" data-name="${a.name}"><div class="life-card-title"><span>${a.name}</span><span class="drag-icon">☰</span></div><div class="life-effect">${a.effect}</div></div>`).join(''); document.querySelectorAll('.life-card').forEach(card=>{card.addEventListener('dragstart',e=>{card.classList.add('dragging');e.dataTransfer.setData('type',card.dataset.type);e.dataTransfer.setData('cat',card.dataset.cat);e.dataTransfer.setData('name',card.dataset.name)});card.addEventListener('dragend',()=>card.classList.remove('dragging'))}); document.querySelectorAll('.life-goal').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.life-goal').forEach(b=>b.classList.remove('active'));btn.classList.add('active');lifeState.goal=btn.dataset.goal;lifeUpdateSummary()})})}
+function lifeRenderCards(){const pool=document.getElementById('lifeCardPool'); if(!pool)return; pool.innerHTML=lifeActivities.map(a=>`<div class="life-card" tabindex="0" role="button" draggable="true" data-type="${a.type}" data-cat="${a.cat}" data-name="${a.name}" onclick="lifeSelectCard(this)"><div class="life-card-title"><span>${a.name}</span><span class="drag-icon">☰</span></div><div class="life-effect">${a.effect}</div></div>`).join(''); document.querySelectorAll('.life-card').forEach(card=>{card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();lifeSelectCard(card)}});card.addEventListener('dragstart',e=>{card.classList.add('dragging');e.dataTransfer.setData('type',card.dataset.type);e.dataTransfer.setData('cat',card.dataset.cat);e.dataTransfer.setData('name',card.dataset.name)});card.addEventListener('dragend',()=>card.classList.remove('dragging'))}); document.querySelectorAll('.life-goal').forEach(btn=>{btn.addEventListener('click',()=>{document.querySelectorAll('.life-goal').forEach(b=>b.classList.remove('active'));btn.classList.add('active');lifeState.goal=btn.dataset.goal;lifeUpdateSummary()})})}
+function lifeSelectCard(card){document.querySelectorAll('.life-card').forEach(c=>c.classList.remove('picked'));card.classList.add('picked');lifePending={type:card.dataset.type,cat:card.dataset.cat,name:card.dataset.name}}
+function lifePlaceSelected(slot){if(!lifePending)return;lifePlace(slot,lifePending.type,lifePending.cat,lifePending.name);lifePending=null;document.querySelectorAll('.life-card').forEach(c=>c.classList.remove('picked'))}
+function lifeSlotKey(event,slot){if(event.key==='Enter'||event.key===' '){event.preventDefault();lifePlaceSelected(slot)}}
 function lifeBindSlots(){document.querySelectorAll('.life-slot').forEach(slot=>{slot.addEventListener('dragover',e=>{e.preventDefault();slot.classList.add('hover')});slot.addEventListener('dragleave',()=>slot.classList.remove('hover'));slot.addEventListener('drop',e=>{e.preventDefault();slot.classList.remove('hover');const type=e.dataTransfer.getData('type'),cat=e.dataTransfer.getData('cat'),name=e.dataTransfer.getData('name'); if(type&&name)lifePlace(slot,type,cat,name)})})}
-function lifePlace(slot,type,cat,name){const empty=slot.querySelector('.life-empty'); if(empty)empty.remove(); const item=document.createElement('div');item.className='life-placed';item.dataset.type=type;item.dataset.cat=cat;item.innerHTML=`<span>${name}</span><button onclick="lifeRemovePlaced(this)">×</button>`;slot.appendChild(item);lifeState.placedCount++;lifeState.counts[cat]++;lifeUpdateStats(type,1);lifeUpdateSlotCounts();lifeUpdateSummary()}
-function lifeRemovePlaced(btn){const item=btn.closest('.life-placed'),slot=item.closest('.life-slot'),type=item.dataset.type,cat=item.dataset.cat;item.remove();lifeState.placedCount--;lifeState.counts[cat]=Math.max(0,lifeState.counts[cat]-1);lifeUpdateStats(type,-1);if(slot.querySelectorAll('.life-placed').length===0){const empty=document.createElement('div');empty.className='life-empty';empty.textContent='＋ 放入活動';slot.appendChild(empty)}lifeUpdateSlotCounts();lifeUpdateSummary()}
+function lifeInvalidateDiagnosis(){if(!lifeDiagnosed)return;lifeDiagnosed=false;checked[current]=false;selected[current]=null;specialScores[current]=null;updateFinalNextButton();renderFeedback();updateScore();showNotice('行程已變更，請重新執行 AI 診斷。','warn')}
+function lifeCreatePlacedItem(id,type,cat,name){const item=document.createElement('div');item.className='life-placed';item.dataset.id=id;item.dataset.type=type;item.dataset.cat=cat;item.innerHTML=`<span>${name}</span><button onclick="event.stopPropagation();lifeRemovePlaced(this)">×</button>`;return item}
+function lifeRenderPlaced(){document.querySelectorAll('.life-slot').forEach(slot=>{slot.querySelectorAll('.life-placed').forEach(item=>item.remove());if(!slot.querySelector('.life-empty')){const empty=document.createElement('div');empty.className='life-empty';empty.textContent='＋ 放入活動';slot.appendChild(empty)}});lifeState.placements.forEach(p=>{const slot=document.querySelector(`.life-slot[data-slot="${p.slot}"]`);if(!slot)return;const empty=slot.querySelector('.life-empty');if(empty)empty.remove();slot.appendChild(lifeCreatePlacedItem(p.id,p.type,p.cat,p.name))});lifeUpdateSlotCounts()}
+function lifePlace(slot,type,cat,name){const hadDiagnosis=lifeDiagnosed;lifeInvalidateDiagnosis();if(!hadDiagnosis)clearNotice();const empty=slot.querySelector('.life-empty');if(empty)empty.remove();const id=++lifePlacementSeq;slot.appendChild(lifeCreatePlacedItem(id,type,cat,name));lifeState.placements.push({id,slot:slot.dataset.slot,type,cat,name});lifeState.placedCount++;lifeState.counts[cat]++;lifeUpdateStats(type,1);lifeUpdateSlotCounts();lifeUpdateSummary()}
+function lifeRemovePlaced(btn){const item=btn.closest('.life-placed'),slot=item.closest('.life-slot'),id=Number(item.dataset.id),type=item.dataset.type,cat=item.dataset.cat;lifeInvalidateDiagnosis();item.remove();lifeState.placements=lifeState.placements.filter(p=>p.id!==id);lifeState.placedCount--;lifeState.counts[cat]=Math.max(0,lifeState.counts[cat]-1);lifeUpdateStats(type,-1);if(slot.querySelectorAll('.life-placed').length===0){const empty=document.createElement('div');empty.className='life-empty';empty.textContent='＋ 放入活動';slot.appendChild(empty)}lifeUpdateSlotCounts();lifeUpdateSummary()}
 function lifeClamp(v){return Math.max(0,Math.min(100,v))}
 function lifeUpdateStats(type,dir){const d=dir,s=lifeState.stats;if(type==='study'){s.focus+=9*d;s.time+=5*d;s.tired+=4*d}if(type==='work'){s.time+=10*d;s.focus+=4*d;s.happy-=5*d;s.tired+=10*d}if(type==='ai'){s.ai+=18*d;s.time+=10*d;s.focus-=7*d;s.tired-=2*d}if(type==='course'){s.focus+=8*d;s.tired+=5*d}if(type==='problem'){s.focus+=13*d;s.tired+=8*d;s.happy-=2*d}if(type==='review'){s.focus+=7*d;s.time+=10*d;s.tired+=4*d}if(type==='sport'){s.health+=13*d;s.happy+=8*d;s.tired-=6*d;s.time-=5*d}if(type==='meal'){s.health+=6*d;s.happy+=4*d;s.time-=3*d}if(type==='water'){s.health+=5*d;s.tired-=3*d}if(type==='sleep'){s.health+=14*d;s.focus+=7*d;s.tired-=18*d;s.time-=8*d}if(type==='rest'){s.happy+=6*d;s.tired-=10*d;s.time-=5*d}if(type==='healthyMeal'){s.health+=11*d;s.focus+=3*d;s.happy-=2*d}if(type==='family'){s.happy+=14*d;s.tired-=4*d;s.time-=5*d}if(type==='music'){s.happy+=8*d;s.tired-=4*d;s.focus-=3*d}if(type==='pet'){s.happy+=9*d;s.tired-=4*d;s.time-=4*d}if(type==='meditate'){s.happy+=6*d;s.focus+=5*d;s.tired-=8*d;s.time-=3*d}if(type==='chat'){s.happy+=9*d;s.time-=6*d;s.focus-=3*d}if(type==='game'){s.happy+=9*d;s.tired-=3*d;s.focus-=6*d;s.time-=9*d}if(type==='phone'){s.happy+=6*d;s.tired-=1*d;s.focus-=9*d;s.time-=10*d;s.ai+=3*d}if(type==='late'){s.time+=6*d;s.health-=14*d;s.focus-=9*d;s.happy-=5*d;s.tired+=20*d}if(type==='snack'){s.happy+=6*d;s.health-=10*d;s.tired+=3*d}if(type==='coffee'){s.focus+=7*d;s.time+=3*d;s.health-=4*d;s.tired+=4*d}if(type==='shopping'){s.happy+=9*d;s.tired+=5*d;s.time-=10*d}if(type==='drama'){s.happy+=8*d;s.tired-=2*d;s.focus-=8*d;s.time-=10*d}Object.keys(s).forEach(k=>s[k]=lifeClamp(s[k]))}
 function lifeUpdateSlotCounts(){document.querySelectorAll('.life-slot').forEach(slot=>{const c=slot.querySelectorAll('.life-placed').length;const count=slot.querySelector('.life-count');if(count)count.textContent=`${c}項`})}
-function lifeUpdateSummary(){const summary=document.getElementById('lifeSummary');if(summary)summary.innerHTML=`<span class="life-tag">已安排 ${lifeState.placedCount} 項</span><span class="life-tag">目標：${lifeState.goal}</span><span class="life-tag">📚${lifeState.counts.study}</span><span class="life-tag">💪${lifeState.counts.health}</span><span class="life-tag">😊${lifeState.counts.happy}</span><span class="life-tag">⚠️${lifeState.counts.risk}</span>`;const btn=document.getElementById('lifeAiBtn');if(btn){if(lifeState.placedCount>=4){btn.classList.add('ready');btn.textContent='🧠 AI診斷鍵（完成安排後按我）'}else{btn.classList.remove('ready');btn.textContent=`🧠 尚未完成安排（還需 ${4-lifeState.placedCount} 項)`}}}
+function lifeUpdateSummary(){const summary=document.getElementById('lifeSummary');if(summary)summary.innerHTML=`<span class="life-tag">已安排 ${lifeState.placedCount} 項</span><span class="life-tag">目標：${lifeState.goal}</span><span class="life-tag">📚${lifeState.counts.study}</span><span class="life-tag">💪${lifeState.counts.health}</span><span class="life-tag">😊${lifeState.counts.happy}</span><span class="life-tag">⚠️${lifeState.counts.risk}</span>`;const btn=document.getElementById('lifeAiBtn');if(btn){if(lifeState.placedCount>=1){btn.classList.add('ready');btn.textContent='🧠 AI診斷鍵（完成安排後按我）'}else{btn.classList.remove('ready');btn.textContent='🧠 請先安排至少 1 項活動'}}}
 function lifeResetPlan(){
 lifeDiagnosed=false;
+lifePending=null;
+lifeAdvanceAfterReport=false;
+checked[current]=false;
+selected[current]=null;
+specialScores[current]=null;
 const nextBtn=document.getElementById('nextBtn');
 if(nextBtn && current===questions.length-1){
   nextBtn.textContent='請先完成AI診斷';
@@ -1843,9 +1800,10 @@ if(nextBtn && current===questions.length-1){
   nextBtn.style.opacity='.45';
   nextBtn.style.cursor='not-allowed';
 }
-document.querySelectorAll('.life-placed').forEach(p=>p.remove());document.querySelectorAll('.life-slot').forEach(slot=>{if(!slot.querySelector('.life-empty')){const empty=document.createElement('div');empty.className='life-empty';empty.textContent='＋ 放入活動';slot.appendChild(empty)}});lifeState.placedCount=0;lifeState.stats={health:50,happy:50,focus:50,time:50,ai:20,tired:30};lifeState.counts={study:0,health:0,happy:0,risk:0};lifeUpdateSlotCounts();lifeUpdateSummary()}
+lifePlacementSeq=0;lifeState.placements=[];document.querySelectorAll('.life-placed').forEach(p=>p.remove());document.querySelectorAll('.life-card').forEach(c=>c.classList.remove('picked'));document.querySelectorAll('.life-slot').forEach(slot=>{if(!slot.querySelector('.life-empty')){const empty=document.createElement('div');empty.className='life-empty';empty.textContent='＋ 放入活動';slot.appendChild(empty)}});lifeState.placedCount=0;lifeState.stats={health:50,happy:50,focus:50,time:50,ai:20,tired:30};lifeState.counts={study:0,health:0,happy:0,risk:0};lifeUpdateSlotCounts();lifeUpdateSummary();renderFeedback();updateScore()}
 function lifeAnalyze(){
-if(lifeState.placedCount<4)return;
+if(lifeState.placedCount<1)return;
+clearNotice();
 
 const s=lifeState.stats;
 
@@ -1966,18 +1924,23 @@ text=`
 `;
 }
 
+const lifePoints=12;
+specialScores[current]=lifePoints;
+text+='<br><br><b>完成結果：</b>你已完成自己的生活安排並閱讀 AI 診斷建議，本題獲得 <b>12 / 12 分</b>。分析內容僅供反思，不代表你的生活有唯一標準答案。';
 const badge=document.getElementById('lifeTypeBadge');badge.className=`life-type-badge ${cls}`;badge.innerHTML=type;document.getElementById('lifeReportText').innerHTML=text;lifeRenderMeters();
 lifeDiagnosed=true;
-selected[current]='balanced';
+selected[current]='completed';
 checked[current]=true;
+lifeAdvanceAfterReport=false;
 updateFinalNextButton();
+updateScore();
 const modal=document.getElementById('lifeModal');
 if(modal){
   modal.classList.add('show');
 }
 }
 function lifeRenderMeters(){const rows=[['health','💪 健康值'],['happy','😊 幸福感'],['focus','🧠 思考力'],['time','⏰ 時間管理'],['ai','🤖 AI依賴度'],['tired','😫 疲勞值']];const s=lifeState.stats;document.getElementById('lifeMeters').innerHTML=rows.map(([k,label])=>`<div class="life-meter"><div class="life-meter-label"><span>${label}</span><span>${s[k]}</span></div><div class="life-bar-bg"><div class="life-bar" style="width:${s[k]}%;background:${(k==='ai'||k==='tired')&&s[k]>65?'#ef4444':'#60a5fa'}"></div></div></div>`).join('')}
-function lifeCloseReport(){document.getElementById('lifeModal').classList.remove('show')}
+function lifeCloseReport(){document.getElementById('lifeModal').classList.remove('show');if(lifeAdvanceAfterReport){lifeAdvanceAfterReport=false;nextQuestion()}}
 function lifeFinishQuiz(){lifeCloseReport();document.getElementById('lifeFinishModal').classList.add('show')}
 function lifeCloseFinish(){document.getElementById('lifeFinishModal').classList.remove('show')}
 
@@ -1990,7 +1953,9 @@ function openFridgeDoor(){
 }
 
 function resetFridgeTask(){
+if(checked[current])return;
 fridgeOpenedOnce=false;
+  fridgePending=null;
   selected[current]={};
   renderOptions();
 }
@@ -1998,600 +1963,63 @@ fridgeOpenedOnce=false;
 
 
 function renderCrisisTask(box,q){
-if(!selected[current]) selected[current]={stage:1};
+if(!selected[current]) selected[current]={stage:1,stage2Choices:[]};
 const s=selected[current];
-const icons=['🛗','🌫️','☣️','🚗'];
-const phaseTitle=['','第一階段：判斷優先事件','第二階段：選擇應變方式','第三階段：通知與協調'];
-const phaseText=['','請找出最需要立即處理的事件','你已鎖定化學工廠事件，請選擇最佳處理方式','請選擇最完整的後續通報方式'];
+if(!Array.isArray(s.stage2Choices))s.stage2Choices=[];
+const icons=['📱','🌬️','🏥','🚇'];
+const phaseTitle=['','第一階段：判讀優先風險','第二階段：立即保護與查證','第三階段：發布查證公告'];
+const phaseText=['','比較資料來源、發展趨勢與影響對象','請選擇 2 項應同時執行的行動','請選擇既能保護市民、又不誇大原因的公告'];
 let content='';
 if(s.stage===1){
-content=q.options.map((op,i)=>`<div class="fact-card ${s.stage1===i?'selected':''}" onclick="selectCrisisStage1(${i})" style="display:flex;align-items:center;justify-content:space-between;padding:18px"><div style="display:flex;gap:14px;align-items:center"><div style="width:54px;height:54px;border-radius:16px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:28px">${icons[i]}</div><div style="line-height:1.7;font-size:15px">${op.replaceAll('｜','<br>')}</div></div></div>`).join('');
+content=q.options.map((op,i)=>`<div class="fact-card crisis-choice ${s.stage1===i?'selected':''}" onclick="selectCrisisStage1(${i})" style="display:flex;align-items:center;justify-content:space-between;padding:15px"><div style="display:flex;gap:12px;align-items:center"><div style="width:48px;height:48px;border-radius:14px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:25px">${icons[i]}</div><div style="line-height:1.55;font-size:14px">${op.replaceAll('｜','<br>')}<div class="crisis-source">${['來源：社群通報','來源：感測器＋風向資料','來源：醫院回報','來源：捷運中心'][i]}</div></div></div></div>`).join('');
 }else if(s.stage===2){
-content=q.stage2Options.map((op,i)=>`<div class="fact-card ${s.stage2Choice===i?'selected':''}" onclick="selectCrisisStage2(${i})" style="display:flex;align-items:center;gap:14px;padding:18px"><div style="width:54px;height:54px;border-radius:16px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:28px">${['🚨','⏳','📱','🚫'][i]}</div><div style="line-height:1.7;font-size:15px">${op}</div></div>`).join('');
+content=`<div class="crisis-verified">已確認：感測器顯示空品短時間惡化，且風向朝住宅區與國小。請在尚未確認污染原因前，選擇兩項立即行動。</div><div style="display:flex;justify-content:flex-end;margin-bottom:8px"><span class="crisis-select-count">已選 ${s.stage2Choices.length} / 2 項</span></div>`+q.stage2Options.map((op,i)=>`<div class="fact-card crisis-choice ${s.stage2Choices.includes(i)?'selected':''}" onclick="toggleCrisisStage2(${i})" style="display:flex;align-items:center;gap:12px;padding:15px"><div style="font-size:24px">${s.stage2Choices.includes(i)?'☑️':'⬜'}</div><div style="line-height:1.6;font-size:14px">${op}</div></div>`).join('')+`<button class="primary" onclick="checkCrisisStage2()" style="width:100%;margin-top:12px">確認兩項行動</button>`;
 }else{
-content=q.stage3Options.map((op,i)=>`<div class="fact-card ${s.stage3Choice===i?'selected':''}" onclick="selectCrisisStage3(${i})" style="display:flex;align-items:center;gap:14px;padding:18px"><div style="width:54px;height:54px;border-radius:16px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:28px">${['📢','📰','🗑️','😷'][i]}</div><div style="line-height:1.7;font-size:15px">${op}</div></div>`).join('');
+content=`<div class="crisis-verified">已執行：校園防護已啟動，環保與消防單位正在確認污染來源及警戒範圍。</div>`+q.stage3Options.map((op,i)=>`<div class="fact-card crisis-choice ${s.stage3Choice===i?'selected':''}" onclick="selectCrisisStage3(${i})" style="display:flex;align-items:center;gap:12px;padding:15px"><div style="width:42px;height:42px;border-radius:13px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:22px">${['📣','✅','💬','🤐'][i]}</div><div style="line-height:1.55;font-size:14px">${op}</div></div>`).join('');
 }
-box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><h3>🚨 城市危機決策中心</h3><div class="small">${phaseTitle[s.stage]}：${phaseText[s.stage]}</div></div><div style="background:${s.stage===1?'#fee2e2':'#dcfce7'};color:${s.stage===1?'#b91c1c':'#166534'};padding:8px 14px;border-radius:999px;font-weight:900">PHASE ${s.stage}/3</div></div><div style="display:flex;gap:8px;margin:10px 0 14px"><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=1?'#2563eb':'#dbeafe'}"></div><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=2?'#2563eb':'#dbeafe'}"></div><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=3?'#2563eb':'#dbeafe'}"></div></div><div id="crisisMsg">${s.msg?`<div class="feedback show bad" style="display:block;margin-bottom:12px">${s.msg}</div>`:''}</div><div style="display:grid;gap:14px;margin-top:12px">${content}</div>${s.stage>1&&!checked[current]?'<button class="secondary" onclick="resetCrisisTask()" style="width:100%;margin-top:14px">↺ 重新開始此題</button>':''}</div>`;
-}
-
-function selectCrisisStage1(i){if(!selected[current])selected[current]={stage:1};const s=selected[current];s.stage1=i;if(i===questions[current].answer){s.stage=2;s.msg=''}else{s.msg='這不是最高優先危機，請再重新判斷。'}checked[current]=false;renderOptions();renderFeedback();updateScore();}
-
-function selectCrisisStage2(i){const s=selected[current];s.stage2Choice=i;if(i===questions[current].stage2Answer){s.stage=3;s.msg=''}else{s.msg='這個處理方式不夠即時或不夠精準，請重新選擇。'}checked[current]=false;renderOptions();renderFeedback();updateScore();}
-
-function selectCrisisStage3(i){const s=selected[current];s.stage3Choice=i;if(i===questions[current].stage3Answer){checked[current]=true;s.msg=''}else{s.msg='這個後續處理不完整，請重新選擇最能協調救援與保護學生居民的方式。'}renderOptions();renderFeedback();updateScore();}
-
-function resetCrisisTask(){selected[current]={stage:1};checked[current]=false;renderOptions();renderFeedback();updateScore();}
-
-let coverUnlocked=false;
-let coverStartY=null;
-let coverStartX=null;
-
-function unlockCover(){
-  if(coverUnlocked)return;
-  coverUnlocked=true;
-  const cover=document.getElementById('lockCover');
-  const screen=document.querySelector('.screen');
-  if(screen)screen.classList.remove('locked');
-  if(cover){
-    cover.classList.add('unlocking');
-    setTimeout(()=>{ if(cover && cover.parentNode) cover.parentNode.removeChild(cover); },850);
-  }
+box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><h3>🚨 城市風險證據中心</h3><div class="small">${phaseTitle[s.stage]}：${phaseText[s.stage]}</div></div><div style="background:${s.stage===1?'#fee2e2':'#dcfce7'};color:${s.stage===1?'#b91c1c':'#166534'};padding:8px 14px;border-radius:999px;font-weight:900">PHASE ${s.stage}/3</div></div><div style="display:flex;gap:8px;margin:10px 0 14px"><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=1?'#2563eb':'#dbeafe'}"></div><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=2?'#2563eb':'#dbeafe'}"></div><div style="flex:1;height:8px;border-radius:999px;background:${s.stage>=3?'#2563eb':'#dbeafe'}"></div></div><div id="crisisMsg">${s.msg?`<div class="feedback show bad" style="display:block;margin-bottom:12px">${s.msg}</div>`:''}</div><div style="display:grid;gap:9px;margin-top:10px">${content}</div>${s.stage>1&&!checked[current]?'<button class="secondary" onclick="resetCrisisTask()" style="width:100%;margin-top:12px">↺ 重新開始此題</button>':''}</div>`;
 }
 
-function bindCoverUnlock(){
-  const cover=document.getElementById('lockCover');
-  const unlock=document.getElementById('unlockArea');
-  const targets=[cover,unlock].filter(Boolean);
-  targets.forEach(el=>{
-    el.addEventListener('click',unlockCover);
-    el.addEventListener('pointerdown',e=>{coverStartY=e.clientY;coverStartX=e.clientX;},{passive:true});
-    el.addEventListener('pointerup',e=>{
-      if(coverStartY===null)return;
-      const dy=coverStartY-e.clientY;
-      const dx=Math.abs((coverStartX||0)-e.clientX);
-      if(dy>25 && dx<160)unlockCover();
-      coverStartY=null;coverStartX=null;
-    },{passive:true});
-    el.addEventListener('touchstart',e=>{ if(e.touches&&e.touches[0]){coverStartY=e.touches[0].clientY;coverStartX=e.touches[0].clientX;} },{passive:true});
-    el.addEventListener('touchend',e=>{
-      if(coverStartY===null || !e.changedTouches || !e.changedTouches[0])return;
-      const dy=coverStartY-e.changedTouches[0].clientY;
-      const dx=Math.abs((coverStartX||0)-e.changedTouches[0].clientX);
-      if(dy>25 && dx<160)unlockCover();
-      coverStartY=null;coverStartX=null;
-    },{passive:true});
-  });
-}
+function selectCrisisStage1(i){if(checked[current])return;if(!selected[current])selected[current]={stage:1,stage2Choices:[]};const s=selected[current];s.stage1=i;if(i===questions[current].answer){s.stage=2;s.stage2Choices=[];s.msg='';renderOptions();renderFeedback();updateScore()}else{s.msg='請同時比較資訊可信度、風險是否快速擴大，以及現場是否已有控制措施。';finishWrongAttempt(s.msg)}}
 
-window.addEventListener('DOMContentLoaded',()=>{
-  bindCoverUnlock();
-});
+function toggleCrisisStage2(i){if(checked[current])return;const s=selected[current];if(!Array.isArray(s.stage2Choices))s.stage2Choices=[];const index=s.stage2Choices.indexOf(i);if(index>=0)s.stage2Choices.splice(index,1);else if(s.stage2Choices.length<2)s.stage2Choices.push(i);else{showNotice('第二階段請剛好選擇 2 項行動。','warn');return}clearNotice();renderOptions()}
+
+function checkCrisisStage2(){if(checked[current])return;const s=selected[current],q=questions[current];if(!Array.isArray(s.stage2Choices)||s.stage2Choices.length!==2){showNotice('請選擇 2 項可同時執行的立即行動。','warn');return}const ok=q.stage2Answers.every(v=>s.stage2Choices.includes(v));if(ok){s.stage=3;s.msg='';renderOptions();renderFeedback();updateScore()}else{s.msg='緊急防護可以先進行，但不能以尚未查證的原因發布消息，也不能拖延必要行動。';finishWrongAttempt(s.msg)}}
+
+function selectCrisisStage3(i){if(checked[current])return;const s=selected[current];s.stage3Choice=i;if(i===questions[current].stage3Answer){checked[current]=true;s.msg='';renderOptions();renderFeedback();updateScore()}else{s.msg='公開資訊應說明已確認的風險與已採取措施，不能宣稱未證實原因，也不能完全不公告。';finishWrongAttempt(s.msg)}}
+
+function resetCrisisTask(){if(checked[current])return;selected[current]={stage:1,stage2Choices:[]};renderOptions();renderFeedback();updateScore();}
 
 render();
 
 
-const __feedbackObserver = new MutationObserver(()=>{
-  const fb=document.getElementById('feedback');
-  if(fb && fb.classList.contains('show')){
-    setTimeout(()=>{
-      fb.scrollIntoView({behavior:'smooth',block:'center'});
-    },80);
-  }
-});
-
-window.addEventListener('load',()=>{
-  const fb=document.getElementById('feedback');
-  if(fb){
-    __feedbackObserver.observe(fb,{attributes:true,attributeFilter:['class']});
-  }
-});
-
-</script>
-
-<script id="q9-enter-top-script-v26">
-(function(){
-  const originalRender = window.renderQuestion;
-  if(originalRender){
-    window.renderQuestion = function(...args){
-      originalRender.apply(this,args);
-
-      requestAnimationFrame(()=>{
-        const screen=document.querySelector('.screen');
-        const panel=document.querySelector('.question-panel');
-
-        if(screen){
-          screen.scrollTop = 0;
-        }
-        if(panel){
-          panel.scrollTop = 0;
-        }
-
-        window.scrollTo(0,0);
-      });
-    }
-  }
-})();
-</script>
 
 
-<script id="instant-feedback-toast-script-v27">
-(function(){
-  function ensureToast(){
-    let t=document.getElementById('instantFeedbackToast');
-    if(!t){
-      t=document.createElement('div');
-      t.id='instantFeedbackToast';
-      t.className='instant-feedback-toast';
-      document.body.appendChild(t);
-    }
-    return t;
-  }
+let coverUnlocked=false;
 
-  window.showInstantFeedback = function(message,isGood){
-    const fb=document.getElementById('feedback');
-    if(fb){
-      fb.className='feedback show '+(isGood?'good':'bad');
-      fb.innerHTML=message;
-    }
+function unlockCover(){
+  if(coverUnlocked)return;
+  coverUnlocked=true;
 
-    const toast=ensureToast();
-    toast.className='instant-feedback-toast show '+(isGood?'good':'bad');
-    toast.innerHTML=message;
+  const cover=document.getElementById('lockCover');
+  const screen=document.querySelector('.screen');
 
-    clearTimeout(window.__instantFeedbackTimer);
-    window.__instantFeedbackTimer=setTimeout(()=>{
-      toast.classList.remove('show');
-    },1800);
-
-    // 第3題或拖拉題有時回饋區在下方，這裡直接讓學生看到回饋。
-    requestAnimationFrame(()=>{
-      if(fb){
-        try{fb.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
-      }
-    });
-  };
-
-  // 讓任何程式只要把 #feedback 顯示出來，也會同步跳出浮動回饋。
-  window.addEventListener('load',()=>{
-    const fb=document.getElementById('feedback');
-    if(!fb) return;
-    const obs=new MutationObserver(()=>{
-      if(fb.classList.contains('show') && fb.textContent.trim()){
-        const isGood=fb.classList.contains('good');
-        const toast=ensureToast();
-        toast.className='instant-feedback-toast show '+(isGood?'good':'bad');
-        toast.innerHTML=fb.innerHTML;
-        clearTimeout(window.__instantFeedbackTimer);
-        window.__instantFeedbackTimer=setTimeout(()=>toast.classList.remove('show'),1800);
-      }
-    });
-    obs.observe(fb,{attributes:true,childList:true,subtree:true,attributeFilter:['class']});
-  });
-})();
-</script>
-
-
-
-
-
-<script id="q3-fridge-feedback-v27">
-(function(){
-  document.addEventListener('click',function(e){
-    const btn=e.target.closest('button');
-    if(!btn) return;
-    const title=document.getElementById('qTitle')?.textContent || '';
-    if(!title.includes('第3題')) return;
-    if(!/完成收納|檢查|完成作答/.test(btn.textContent || '')) return;
+  if(cover){
+    cover.classList.add('unlocking');
 
     setTimeout(()=>{
-      const fb=document.getElementById('feedback');
-      let msg = fb && fb.textContent.trim()
-        ? fb.innerHTML
-        : '已完成檢查：冷藏、冷凍與常溫食品都要放到適合位置，才能避免食品變質。';
-      const good = fb ? fb.classList.contains('good') : true;
-      window.showInstantFeedback(msg,good);
-    },120);
-  },true);
-})();
-</script>
-
-
-
-
-
-
-
-
-<script id="toast-only-feedback-v31">
-window.addEventListener('load',()=>{
-
-  const fb=document.getElementById('feedback');
-
-  if(!fb) return;
-
-  const observer=new MutationObserver(()=>{
-
-    const title=document.getElementById('qTitle')?.textContent || '';
-
-    // 第9題維持原本分析
-    if(title.includes('第9題')) return;
-
-    if(fb.textContent.trim()){
-
-      const isGood=fb.classList.contains('good');
-
-      if(window.showInstantFeedback){
-        window.showInstantFeedback(fb.innerHTML,isGood);
+      cover.remove();
+      if(screen){
+        screen.classList.remove('locked');
       }
+    },850);
+  }else{
+    if(screen){
+      screen.classList.remove('locked');
     }
-  });
+  }
+}
 
-  observer.observe(fb,{
-    childList:true,
-    subtree:true,
-    attributes:true,
-    attributeFilter:['class']
-  });
-});
 </script>
-
-
-<script id="toast-only-strong-script-v32">
-(function(){
-  function getToast(){
-    let t=document.getElementById('instantFeedbackToast');
-    if(!t){
-      t=document.createElement('div');
-      t.id='instantFeedbackToast';
-      t.className='instant-feedback-toast';
-      document.body.appendChild(t);
-    }
-    return t;
-  }
-
-  function hideInlineFeedback(){
-    const fb=document.getElementById('feedback');
-    if(!fb) return;
-    fb.style.setProperty('display','none','important');
-    fb.style.setProperty('visibility','hidden','important');
-    fb.style.setProperty('opacity','0','important');
-    fb.style.setProperty('height','0','important');
-    fb.style.setProperty('min-height','0','important');
-    fb.style.setProperty('max-height','0','important');
-    fb.style.setProperty('margin','0','important');
-    fb.style.setProperty('padding','0','important');
-    fb.style.setProperty('border','0','important');
-    fb.style.setProperty('overflow','hidden','important');
-  }
-
-  function stripHtml(html){
-    const tmp=document.createElement('div');
-    tmp.innerHTML=html || '';
-    return tmp.textContent.trim();
-  }
-
-  window.showToastOnlyFeedbackV32=function(message,isGood){
-    const title=document.getElementById('qTitle')?.textContent || '';
-    if(title.includes('第9題')) return; // 第9題保留AI診斷報告
-
-    const toast=getToast();
-    const msg=(message || '').trim();
-    if(!stripHtml(msg)) return;
-
-    toast.className='instant-feedback-toast show '+(isGood?'good':'bad');
-    toast.innerHTML=msg;
-
-    clearTimeout(window.__toastOnlyTimerV32);
-    window.__toastOnlyTimerV32=setTimeout(()=>{
-      toast.classList.remove('show');
-    },1800);
-
-    hideInlineFeedback();
-  };
-
-  function showFromFeedback(){
-    const title=document.getElementById('qTitle')?.textContent || '';
-    if(title.includes('第9題')) return;
-
-    const fb=document.getElementById('feedback');
-    if(!fb) return;
-
-    const html=fb.innerHTML || '';
-    const txt=stripHtml(html);
-    const isGood=fb.classList.contains('good');
-
-    hideInlineFeedback();
-
-    if(txt){
-      window.showToastOnlyFeedbackV32(html,isGood);
-    }
-  }
-
-  // 任何選項、完成、檢查、送出後，都立刻讀取原本回饋文字並改成 toast
-  document.addEventListener('click',function(e){
-    const target=e.target;
-    const opt=target.closest?.('.option');
-    const btn=target.closest?.('button');
-
-    const usefulButton = btn && /完成|檢查|送出|確認|付款|收納|排序|提交|下一題/.test(btn.textContent || '');
-
-    if(opt || usefulButton){
-      setTimeout(showFromFeedback,60);
-      setTimeout(showFromFeedback,180);
-      setTimeout(showFromFeedback,360);
-    }
-  },true);
-
-  // feedback 文字或 class 一變，也轉成 toast
-  window.addEventListener('load',()=>{
-    hideInlineFeedback();
-
-    const fb=document.getElementById('feedback');
-    if(fb){
-      const obs=new MutationObserver(()=>{
-        setTimeout(showFromFeedback,20);
-      });
-      obs.observe(fb,{attributes:true,childList:true,subtree:true,attributeFilter:['class','style']});
-    }
-
-    // 每次題目重繪後再次隱藏
-    const root=document.querySelector('.screen') || document.body;
-    const rootObs=new MutationObserver(()=>hideInlineFeedback());
-    rootObs.observe(root,{childList:true,subtree:true});
-  });
-
-  // 覆寫舊的 showInstantFeedback，避免它又捲到頁面或顯示內嵌框
-  window.showInstantFeedback=function(message,isGood){
-    window.showToastOnlyFeedbackV32(message,isGood);
-  };
-})();
-</script>
-
-
-<script id="q4-q6-q9-final-fix-v33">
-(function(){
-
-  function currentTitle(){
-    return document.getElementById('qTitle')?.textContent || '';
-  }
-
-  function currentQuestionIndex(){
-    const title=currentTitle();
-    const m=title.match(/第(\d+)題/);
-    return m ? Number(m[1]) : null;
-  }
-
-  function forceTop(){
-    const screen=document.querySelector('.screen');
-    const panel=document.querySelector('.question-panel');
-    const main=document.querySelector('.main');
-    const options=document.getElementById('options');
-
-    [screen,panel,main,options,document.documentElement,document.body].forEach(el=>{
-      if(el && typeof el.scrollTop === 'number') el.scrollTop = 0;
-    });
-
-    window.scrollTo(0,0);
-  }
-
-  function enableNextButton(){
-    const next=document.getElementById('nextBtn');
-    if(!next) return;
-    next.disabled=false;
-    next.removeAttribute('disabled');
-    next.classList.add('ready');
-    next.style.pointerEvents='auto';
-    next.style.cursor='pointer';
-  }
-
-  function showToast(message,isGood){
-    if(window.showToastOnlyFeedbackV32){
-      window.showToastOnlyFeedbackV32(message,isGood);
-    }else if(window.showInstantFeedback){
-      window.showInstantFeedback(message,isGood);
-    }else{
-      alert(message.replace(/<[^>]+>/g,''));
-    }
-  }
-
-  // 第4題：選到正確餐點後，確保可送出/下一題
-  function fixQ4Submit(){
-    const title=currentTitle();
-    if(!title.includes('第4題')) return;
-
-    const opts=[...document.querySelectorAll('.option')];
-    const selected=opts.filter(o=>o.classList.contains('selected'));
-
-    // 雞肉捲餅 + 無糖豆漿
-    const hasWrap=selected.some(o=>/雞肉捲餅/.test(o.textContent));
-    const hasSoy=selected.some(o=>/無糖豆漿/.test(o.textContent));
-
-    if(hasWrap && hasSoy && selected.length===2){
-      enableNextButton();
-      showToast('搭配正確：雞肉捲餅＋無糖豆漿同時符合預算、糖分、蛋白質與熱量限制。',true);
-    }else if(selected.length>=2){
-      enableNextButton();
-      showToast('搭配還不完整：請同時檢查預算、糖分、蛋白質與熱量限制，不是看起來健康就一定正確。',false);
-    }
-  }
-
-  // 第6題：按檢查排序後，不讓按鈕失效；排序正確或已檢查都可繼續
-  function fixQ6SubmitByButton(btn){
-    const title=currentTitle();
-    if(!title.includes('第6題')) return;
-
-    const label=btn?.textContent || '';
-    if(!/檢查|排序|完成|送出/.test(label)) return;
-
-    setTimeout(()=>{
-      enableNextButton();
-
-      const fb=document.getElementById('feedback');
-      const html=fb && fb.textContent.trim()
-        ? fb.innerHTML
-        : '已完成排序檢查：優先處理睡眠與作息問題，會比短暫提神更能真正恢復疲勞。';
-
-      const isGood=fb ? fb.classList.contains('good') : true;
-      showToast(html,isGood);
-    },120);
-  }
-
-  // 進入第9題時強制回上方，而且連續執行幾次避免被原本程式又拉到底部
-  function fixQ9Top(){
-    const title=currentTitle();
-    if(!title.includes('第9題')) return;
-
-    [0,60,160,320,650].forEach(t=>{
-      setTimeout(forceTop,t);
-    });
-  }
-
-  // 攔截點擊
-  document.addEventListener('click',function(e){
-    const opt=e.target.closest?.('.option');
-    const btn=e.target.closest?.('button');
-
-    if(opt){
-      setTimeout(fixQ4Submit,80);
-      setTimeout(fixQ9Top,120);
-    }
-
-    if(btn){
-      fixQ6SubmitByButton(btn);
-
-      // 下一題/上一題切換後檢查第9題定位
-      if(/下一題|上一題/.test(btn.textContent || '')){
-        [120,260,520].forEach(t=>setTimeout(fixQ9Top,t));
-      }
-    }
-  },true);
-
-  // 包一層 renderQuestion，題目重繪後修正
-  window.addEventListener('load',()=>{
-    const oldRender=window.renderQuestion;
-    if(typeof oldRender==='function' && !oldRender.__v33Wrapped){
-      const wrapped=function(){
-        const result=oldRender.apply(this,arguments);
-        setTimeout(fixQ4Submit,80);
-        setTimeout(fixQ9Top,80);
-        return result;
-      };
-      wrapped.__v33Wrapped=true;
-      window.renderQuestion=wrapped;
-    }
-
-    // 初始也檢查
-    setTimeout(fixQ9Top,200);
-  });
-
-})();
-</script>
-
-
-
-<script id="toast-duration-clear-final-v34">
-/* ===== v34：答對/答錯提示縮短＋切換題目立即清除 ===== */
-(function(){
-  const TOAST_MS = 1700; // 提示顯示 1.7 秒，避免跳到下一題還殘留
-
-  function getToast(){
-    let t=document.getElementById('instantFeedbackToast');
-    if(!t){
-      t=document.createElement('div');
-      t.id='instantFeedbackToast';
-      t.className='instant-feedback-toast';
-      document.body.appendChild(t);
-    }
-    return t;
-  }
-
-  function clearAllFeedback(){
-    clearTimeout(window.__instantFeedbackTimer);
-    clearTimeout(window.__toastOnlyTimerV32);
-    clearTimeout(window.__toastTimerV34);
-
-    const toast=document.getElementById('instantFeedbackToast');
-    if(toast){
-      toast.classList.remove('show','good','bad');
-      toast.style.display='none';
-      toast.innerHTML='';
-    }
-
-    const fb=document.getElementById('feedback');
-    if(fb){
-      fb.className='feedback';
-      fb.innerHTML='';
-      fb.style.setProperty('display','none','important');
-      fb.style.setProperty('visibility','hidden','important');
-      fb.style.setProperty('opacity','0','important');
-      fb.style.setProperty('height','0','important');
-      fb.style.setProperty('min-height','0','important');
-      fb.style.setProperty('max-height','0','important');
-      fb.style.setProperty('margin','0','important');
-      fb.style.setProperty('padding','0','important');
-      fb.style.setProperty('border','0','important');
-      fb.style.setProperty('overflow','hidden','important');
-    }
-  }
-
-  function showShortToast(message,isGood=true){
-    const title=document.getElementById('qTitle')?.textContent || '';
-    if(title.includes('第9題')) return; // 第9題使用AI診斷報告，不用一般答題toast
-
-    const msg=(message || '').trim();
-    if(!msg.replace(/<[^>]*>/g,'').trim()) return;
-
-    const toast=getToast();
-    toast.style.display='block';
-    toast.className='instant-feedback-toast show '+(isGood?'good':'bad');
-    toast.innerHTML=msg;
-
-    clearTimeout(window.__instantFeedbackTimer);
-    clearTimeout(window.__toastOnlyTimerV32);
-    clearTimeout(window.__toastTimerV34);
-    window.__toastTimerV34=setTimeout(clearAllFeedback,TOAST_MS);
-  }
-
-  // 最後覆寫所有舊版提示函式：統一改成短秒數
-  window.clearAllFeedbackV34 = clearAllFeedback;
-  window.showInstantFeedback = showShortToast;
-  window.showToastOnlyFeedbackV32 = showShortToast;
-
-  // 按上一題/下一題/完成測驗前，先把殘留提示清掉
-  const oldNext = window.nextQuestion;
-  if(typeof oldNext === 'function'){
-    window.nextQuestion = function(...args){
-      clearAllFeedback();
-      return oldNext.apply(this,args);
-    };
-  }
-
-  const oldPrev = window.prevQuestion;
-  if(typeof oldPrev === 'function'){
-    window.prevQuestion = function(...args){
-      clearAllFeedback();
-      return oldPrev.apply(this,args);
-    };
-  }
-
-  const oldRender = window.render;
-  if(typeof oldRender === 'function'){
-    window.render = function(...args){
-      clearAllFeedback();
-      const out = oldRender.apply(this,args);
-      setTimeout(clearAllFeedback,0);
-      return out;
-    };
-  }
-
-  document.addEventListener('click',function(e){
-    const btn=e.target.closest && e.target.closest('button');
-    if(btn && /上一題|下一題|完成測驗|請先完成AI診斷/.test(btn.textContent || '')){
-      clearAllFeedback();
-    }
-  },true);
-})();
-</script>
-
 </body>
 </html>
